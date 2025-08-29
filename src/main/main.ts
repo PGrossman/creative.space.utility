@@ -39,11 +39,15 @@ app.on("activate", () => { if (BrowserWindow.getAllWindows().length === 0) creat
 // IPC (pure calculation calls routed via modules in src/shared/modules/*)
 ipcMain.handle("calc:run", async (_e, { module, fn, payload }) => {
   try {
-    const mod = await import(`../shared/modules/${module}/index.js`);
-    if (!mod?.[fn]) throw new Error(`Function ${fn} not found in module ${module}`);
-    return await mod[fn](payload);
-  } catch (error) {
-    console.error(`IPC error in module ${module}, function ${fn}:`, error);
-    throw error;
+    // dist-electron/main/main.js -> __dirname
+    // compiled shared ends up at dist-electron/shared/modules/<module>/index.js
+    const target = path.join(__dirname, "../shared/modules", module, "index.js");
+    const mod = await import(`file://${target}`);
+    const impl = (mod?.[fn] ?? mod?.default?.[fn]);
+    if (typeof impl !== "function") throw new Error(`Function ${fn} not found in module ${module}`);
+    return await impl(payload);
+  } catch (err) {
+    console.error("calc:run error", err);
+    throw err;
   }
 });
