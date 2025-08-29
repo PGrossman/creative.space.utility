@@ -1,0 +1,1 @@
+module.exports = { singleQuote: false, semi: true, printWidth: 100, trailingComma: "es5" };

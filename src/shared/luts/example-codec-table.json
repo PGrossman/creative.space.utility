@@ -1,0 +1,4 @@
+{
+  "prores_422_hq": { "name": "ProRes 422 HQ", "multiplier": 1.0 },
+  "dnxhr_hqx": { "name": "DNxHR HQX", "multiplier": 0.92 }
+}
