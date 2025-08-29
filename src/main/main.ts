@@ -1,11 +1,13 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import isDev from "electron-is-dev";
 import { registerAppMenu } from "./app-menu.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 let win: BrowserWindow | null = null;
+
+// Check if we're in development mode by looking for the dev server
+const isDev = process.env.VITE_DEV_SERVER === "true";
 
 async function createWindow() {
   win = new BrowserWindow({
@@ -29,12 +31,23 @@ async function createWindow() {
     await win.loadFile(path.join(__dirname, "../../dist/index.html"));
   }
 
-  win.on("closed", () => (win = null));
+  win.on("closed", () => {
+    win = null;
+    app.quit();   // force quit when window is closed
+  });
 }
 
 app.whenReady().then(createWindow);
-app.on("window-all-closed", () => { if (process.platform !== "darwin") app.quit(); });
-app.on("activate", () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
+
+app.on("window-all-closed", () => {
+  // Quit on all platforms
+  app.quit();
+});
+
+app.on("activate", () => {
+  // On mac, normally you'd re-open — but since you want quit-on-close,
+  // you can leave this empty or just log if needed.
+});
 
 // IPC (pure calculation calls routed via modules in src/shared/modules/*)
 ipcMain.handle("calc:run", async (_e, { module, fn, payload }) => {
