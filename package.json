@@ -12,6 +12,7 @@
     "build:app": "vite build && npm run build:electron",
     "build:electron": "tsc -p tsconfig.electron.json",
     "preview": "npm run build:app && electron .",
+    "pack:installer": "npm run build:app && electron-builder",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write .",
     "test": "vitest run",
