@@ -1,173 +1,208 @@
-import React, { useEffect, useState } from "react";
-import { Dropdown } from "../components/Dropdown";
-import { Card } from "../components/Card";
-import type { CapacityInput, CapacityResult } from "../../shared/modules/storageCapacity";
+import React, { useEffect, useMemo, useState } from "react";
 
-const raidOptions = [
-  { label: "RAIDZ1", value: "RAIDZ1" },
-  { label: "RAIDZ2", value: "RAIDZ2" },
-  { label: "RAIDZ3", value: "RAIDZ3" },
-  { label: "MIRROR", value: "MIRROR" },
-  { label: "RAID0", value: "RAID0" }
-];
+type RaidType = "RAIDZ1" | "RAIDZ2" | "RAIDZ3";
+type InputState = {
+  raidType: RaidType;
+  drivesPerVdev: number;
+  vdevs: number;
+  driveSizeTb: number;
+  driveSpeedMBs: number;
+  zfsOverheadPct: number; // 0..1
+};
+
+type Result = {
+  rawTb: number;
+  parityTb: number;
+  zfsOverheadTb: number;
+  usableTbBeforeZfs: number;
+  usableTb: number;
+  readGBs: number;
+  arcGBs: number;
+  writeGBs: number;
+  totalDrives: number;
+  dataDrives: number;
+  parityDrives: number;
+  protection: string;
+};
+
+const TB = (n: number) => `${n.toFixed(1)} TB`;
+const GBS = (n: number) => `${n.toFixed(2)} GB/s`;
 
 export default function StorageSize() {
-  const [input, setInput] = useState<CapacityInput>({
+  const [input, setInput] = useState<InputState>({
     raidType: "RAIDZ2",
     drivesPerVdev: 6,
     vdevs: 1,
-    driveSizeTb: 18,
-    driveSpeedMBs: 250,
-    zfsOverheadPct: 0.12
+    driveSizeTb: 16,
+    driveSpeedMBs: 225,
+    zfsOverheadPct: 0.20
   });
 
-  const [result, setResult] = useState<CapacityResult | null>(null);
+  const [out, setOut] = useState<Result | null>(null);
+  const overheadPctDisplay = useMemo(() => Math.round(input.zfsOverheadPct * 100), [input.zfsOverheadPct]);
 
   useEffect(() => {
     (async () => {
       try {
-        const out = await window.api.calc({ 
-          module: "storageCapacity", 
-          fn: "calcCapacity", 
-          payload: input 
-        }) as CapacityResult;
-        setResult(out);
-      } catch (error) {
-        console.error("Calculation error:", error);
+        const res = await window.api.calc({
+          module: "storageCapacity",
+          fn: "calcCapacity",
+          payload: input
+        });
+        setOut(res);
+      } catch (e) {
+        console.error(e);
+        setOut(null);
       }
     })();
   }, [input]);
 
-  const updateInput = (key: keyof CapacityInput, value: number | string) => {
-    setInput(prev => ({ ...prev, [key]: value }));
-  };
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {/* Left Column - Inputs */}
-      <div className="space-y-4">
-        <Card title="RAID Configuration">
-          <div className="space-y-3">
-            <Dropdown 
-              label="RAID Type" 
-              value={input.raidType} 
-              options={raidOptions} 
-              onChange={(v) => updateInput("raidType", v)} 
-            />
-            <label className="flex items-center gap-2">
-              <span className="w-40">Drives per VDEV</span>
-              <input
-                type="number"
-                className="border rounded p-2 w-24"
-                value={input.drivesPerVdev}
-                onChange={(e) => updateInput("drivesPerVdev", parseInt(e.target.value))}
-                min="1"
-              />
-            </label>
-            <label className="flex items-center gap-2">
-              <span className="w-40">Number of VDEVs</span>
-              <input
-                type="number"
-                className="border rounded p-2 w-24"
-                value={input.vdevs}
-                onChange={(e) => updateInput("vdevs", parseInt(e.target.value))}
-                min="1"
-              />
-            </label>
-            <label className="flex items-center gap-2">
-              <span className="w-40">Drive Size (TB)</span>
-              <input
-                type="number"
-                className="border rounded p-2 w-24"
-                value={input.driveSizeTb}
-                onChange={(e) => updateInput("driveSizeTb", parseFloat(e.target.value))}
-                min="0.1"
-                step="0.1"
-              />
-            </label>
-            <label className="flex items-center gap-2">
-              <span className="w-40">Drive Speed (MB/s)</span>
-              <input
-                type="number"
-                className="border rounded p-2 w-24"
-                value={input.driveSpeedMBs}
-                onChange={(e) => updateInput("driveSpeedMBs", parseInt(e.target.value))}
-                min="1"
-              />
-            </label>
-            <label className="flex items-center gap-2">
-              <span className="w-40">ZFS Overhead (%)</span>
-              <input
-                type="range"
-                className="flex-1"
-                min="0"
-                max="0.30"
-                step="0.01"
-                value={input.zfsOverheadPct}
-                onChange={(e) => updateInput("zfsOverheadPct", parseFloat(e.target.value))}
-              />
-              <span className="w-16 text-sm">{(input.zfsOverheadPct * 100).toFixed(0)}%</span>
-            </label>
+      {/* Left panel — Drive Configuration */}
+      <div className="border rounded-xl p-5">
+        <h3 className="font-semibold mb-4">Drive Configuration</h3>
+
+        <Field label="RAID Type:">
+          <select
+            className="border rounded p-2 w-full"
+            value={input.raidType}
+            onChange={(e) => setInput(s => ({ ...s, raidType: e.target.value as RaidType }))}
+          >
+            <option value="RAIDZ1">RAIDZ1</option>
+            <option value="RAIDZ2">RAIDZ2</option>
+            <option value="RAIDZ3">RAIDZ3</option>
+          </select>
+        </Field>
+
+        <Field label="Drives per VDEV:">
+          <NumberInput value={input.drivesPerVdev} min={2} step={1}
+            onChange={(n) => setInput(s => ({ ...s, drivesPerVdev: n }))} />
+        </Field>
+
+        <Field label="Number of VDEVs:">
+          <NumberInput value={input.vdevs} min={1} step={1}
+            onChange={(n) => setInput(s => ({ ...s, vdevs: n }))} />
+        </Field>
+
+        <Field label="Drive Size (TB):">
+          <select
+            className="border rounded p-2 w-full"
+            value={input.driveSizeTb}
+            onChange={(e) => setInput(s => ({ ...s, driveSizeTb: Number(e.target.value) }))}
+          >
+            <option value={16}>16 TB</option>
+            <option value={20}>20 TB</option>
+            <option value={24}>24 TB</option>
+          </select>
+        </Field>
+
+        <Field label="Drive Speed (MB/s):">
+          <NumberInput value={input.driveSpeedMBs} min={1} step={1}
+            onChange={(n) => setInput(s => ({ ...s, driveSpeedMBs: n }))} />
+        </Field>
+
+        <div className="mt-4">
+          <div className="flex items-center justify-between">
+            <label className="text-sm font-medium">ZFS Overhead (%):</label>
+            <span className="text-sm">{overheadPctDisplay}%</span>
           </div>
+          <input
+            type="range"
+            className="w-full"
+            min={0}
+            max={40}
+            step={1}
+            value={overheadPctDisplay}
+            onChange={(e) => setInput(s => ({ ...s, zfsOverheadPct: Number(e.target.value) / 100 }))}
+          />
+        </div>
+
+        <div className="mt-6">
+          <div className="text-xs uppercase tracking-wide text-zinc-500">Total Raw Storage:</div>
+          <div className="mt-1 p-3 border rounded-lg text-center font-semibold">
+            {out ? TB(out.rawTb) : "—"}
+          </div>
+        </div>
+      </div>
+
+      {/* Right panel — Results */}
+      <div className="grid gap-5">
+        <Card title="Usable Storage">
+          <StatRow name="Total Capacity:" value={out ? TB(out.rawTb) : "—"} />
+          <StatRow name="ZFS Overhead:" value={out ? TB(out.zfsOverheadTb) : "—"} />
+          <StatRow name="RAID:" value={out ? TB(out.parityTb) : "—"} />
+          <div className="mt-3 text-2xl font-bold">{out ? TB(out.usableTb) : "—"}</div>
+        </Card>
+
+        <Card title="Read Performance">
+          <StatRow name="Read Speed:" value={out ? GBS(out.readGBs) : "—"} emphasis="green" />
+          <StatRow name="ARC Performance:" value={out ? GBS(out.arcGBs) : "—"} />
+          <StatRow name="Write Speed:" value={out ? GBS(out.writeGBs) : "—"} emphasis="red" />
+        </Card>
+
+        <Card title="Drive Configuration">
+          <div className="text-xl font-semibold mb-1">{out ? `${out.totalDrives} Drives` : "—"}</div>
+          <StatRow name="Total Drives:" value={out ? String(out.totalDrives) : "—"} />
+          <StatRow name="Data Drives:" value={out ? String(out.dataDrives) : "—"} />
+          <StatRow name="Parity Drives:" value={out ? String(out.parityDrives) : "—"} />
+        </Card>
+
+        <Card title="Protection Level">
+          <div className="text-lg font-semibold">{out ? out.protection : "—"}</div>
         </Card>
       </div>
+    </div>
+  );
+}
 
-      {/* Right Column - Results */}
-      <div className="space-y-4">
-        {result && (
-          <>
-            <Card title="Storage Capacity">
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span>Raw Storage:</span>
-                  <span className="font-mono">{result.rawTb.toFixed(1)} TB</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Usable (after parity):</span>
-                  <span className="font-mono">{result.usableTb.toFixed(1)} TB</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Usable (after ZFS):</span>
-                  <span className="font-mono">{result.usableAfterZfsTb.toFixed(1)} TB</span>
-                </div>
-              </div>
-            </Card>
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label className="flex flex-col gap-2 mb-4">
+      <span className="text-sm font-medium">{label}</span>
+      {children}
+    </label>
+  );
+}
 
-            <Card title="Performance">
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span>Read Speed:</span>
-                  <span className="font-mono">{result.readGBs.toFixed(1)} GB/s</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Write Speed:</span>
-                  <span className="font-mono">{result.writeGBs.toFixed(1)} GB/s</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>ARC Boost:</span>
-                  <span className="font-mono">{result.arcGBs.toFixed(1)} GB/s</span>
-                </div>
-              </div>
-            </Card>
+function NumberInput({
+  value, onChange, min = 0, step = 1
+}: {
+  value: number; onChange: (n: number) => void; min?: number; step?: number;
+}) {
+  return (
+    <input
+      type="number"
+      className="border rounded p-2 w-full"
+      value={value}
+      min={min}
+      step={step}
+      onChange={(e) => onChange(Number(e.target.value))}
+    />
+  );
+}
 
-            <Card title="Drive Configuration">
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span>Data Drives:</span>
-                  <span className="font-mono">{result.dataDrives}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Parity Drives:</span>
-                  <span className="font-mono">{result.parityDrives}</span>
-                </div>
-                <div className="pt-2 border-t">
-                  <div className="text-xs text-gray-600">{result.protection}</div>
-                </div>
-              </div>
-            </Card>
-          </>
-        )}
-      </div>
+function Card({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="border rounded-xl p-5">
+      <h3 className="font-semibold mb-3">{title}</h3>
+      {children}
+    </div>
+  );
+}
+
+function StatRow({
+  name, value, emphasis
+}: {
+  name: string; value: string; emphasis?: "green" | "red";
+}) {
+  const cls = emphasis === "green" ? "text-green-600"
+           : emphasis === "red"   ? "text-red-600"
+           : "text-zinc-900";
+  return (
+    <div className="flex items-center justify-between text-sm py-1">
+      <div className="text-zinc-600">{name}</div>
+      <div className={`font-medium ${cls}`}>{value}</div>
     </div>
   );
 }

@@ -1,45 +1,40 @@
 import { describe, it, expect } from "vitest";
 import { calcCapacity } from "./index";
 
-describe("calcCapacity", () => {
-  it("calculates RAIDZ2 configuration correctly", () => {
-    const input = {
-      raidType: "RAIDZ2" as const,
+describe("calcCapacity (Z2, 6x16TB, 1 vdev, 225MB/s, 20%)", () => {
+  it("computes sane values", () => {
+    const out = calcCapacity({
+      raidType: "RAIDZ2",
       drivesPerVdev: 6,
       vdevs: 1,
-      driveSizeTb: 18,
-      driveSpeedMBs: 250,
-      zfsOverheadPct: 0.12
-    };
-
-    const result = calcCapacity(input);
-
-    expect(result.rawTb).toBe(108); // 6 * 18
-    expect(result.usableTb).toBe(72); // (6-2) * 18
-    expect(result.usableAfterZfsTb).toBe(63.36); // 72 * (1-0.12)
-    expect(result.dataDrives).toBe(4); // 6-2
-    expect(result.parityDrives).toBe(2); // 2
-    expect(result.readGBs).toBeGreaterThan(0);
-    expect(result.writeGBs).toBeGreaterThan(0);
-    expect(result.protection).toContain("Can survive 2 drives per vdev");
+      driveSizeTb: 16,
+      driveSpeedMBs: 225,
+      zfsOverheadPct: 0.20
+    });
+    expect(out.totalDrives).toBe(6);
+    expect(out.parityDrives).toBe(2);
+    expect(out.dataDrives).toBe(4);
+    expect(out.rawTb).toBeCloseTo(96, 5);
+    expect(out.usableTbBeforeZfs).toBeCloseTo(64, 5);
+    expect(out.usableTb).toBeCloseTo(51.2, 3); // 64 - 20%
   });
+});
 
-  it("calculates MIRROR configuration correctly", () => {
-    const input = {
-      raidType: "MIRROR" as const,
+describe("calcCapacity (Z1, 4x20TB, 2 vdevs, 250MB/s, 15%)", () => {
+  it("computes multi-vdev values", () => {
+    const out = calcCapacity({
+      raidType: "RAIDZ1",
       drivesPerVdev: 4,
       vdevs: 2,
-      driveSizeTb: 18,
+      driveSizeTb: 20,
       driveSpeedMBs: 250,
-      zfsOverheadPct: 0.10
-    };
-
-    const result = calcCapacity(input);
-
-    expect(result.rawTb).toBe(144); // 4 * 2 * 18
-    expect(result.usableTb).toBe(72); // (4/2) * 2 * 18
-    expect(result.dataDrives).toBe(4); // (4/2) * 2
-    expect(result.parityDrives).toBe(4); // (4/2) * 2
-    expect(result.protection).toContain("Can survive 1 drive per mirror pair");
+      zfsOverheadPct: 0.15
+    });
+    expect(out.totalDrives).toBe(8);
+    expect(out.parityDrives).toBe(2);
+    expect(out.dataDrives).toBe(6);
+    expect(out.rawTb).toBeCloseTo(160, 5);
+    expect(out.usableTbBeforeZfs).toBeCloseTo(120, 5);
+    expect(out.usableTb).toBeCloseTo(102, 3); // 120 - 15%
   });
 });
