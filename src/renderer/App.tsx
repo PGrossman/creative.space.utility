@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Shell from "./components/Shell";
 import { Dropdown } from "./components/Dropdown";
 import { Card } from "./components/Card";
+import type { BitrateResult } from "../shared/modules/bitrate/bitrate.types";
 
 type Option = { label: string; value: string };
 
@@ -27,7 +28,7 @@ export default function App() {
         module: "bitrate",
         fn: "estimateBitrate",
         payload: { codec, resolutionKey: res, minutes: 10 }
-      });
+      }) as BitrateResult;
       setEstimate(`${result.mbps.toFixed(2)} Mbps (~${result.gb.toFixed(2)} GB / 10 min)`);
     })();
   }, [codec, res]);
