@@ -36,9 +36,14 @@ app.whenReady().then(createWindow);
 app.on("window-all-closed", () => { if (process.platform !== "darwin") app.quit(); });
 app.on("activate", () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
 
-// IPC (pure calculation calls should be routed via modules in src/shared/modules/*)
+// IPC (pure calculation calls routed via modules in src/shared/modules/*)
 ipcMain.handle("calc:run", async (_e, { module, fn, payload }) => {
-  const mod = await import(`../shared/modules/${module}/index.js`);
-  if (!mod?.[fn]) throw new Error(`Function ${fn} not found in module ${module}`);
-  return await mod[fn](payload);
+  try {
+    const mod = await import(`../shared/modules/${module}/index.js`);
+    if (!mod?.[fn]) throw new Error(`Function ${fn} not found in module ${module}`);
+    return await mod[fn](payload);
+  } catch (error) {
+    console.error(`IPC error in module ${module}, function ${fn}:`, error);
+    throw error;
+  }
 });
