@@ -46,10 +46,10 @@ export default function StorageSize() {
       try {
         const res = await window.api.calc({
           module: "storageCapacity",
-          fn: "calcCapacity",
+          fn: "run",
           payload: input
         });
-        setOut(res);
+        setOut(res as Result);
       } catch (e) {
         console.error(e);
         setOut(null);

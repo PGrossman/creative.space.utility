@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { registerAppMenu } from "./app-menu.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -13,12 +13,12 @@ async function createWindow() {
   win = new BrowserWindow({
     width: 1200,
     height: 800,
-    webPreferences: {
-      contextIsolation: true,
-      preload: path.join(__dirname, "../preload/preload.js"),
-      nodeIntegration: false,
-      sandbox: true
-    },
+          webPreferences: {
+        contextIsolation: true,
+        preload: path.join(__dirname, "../preload/preload.js"),
+        nodeIntegration: false,
+        sandbox: false
+      },
     title: "creative.space.utility"
   });
 
@@ -52,12 +52,12 @@ app.on("activate", () => {
 // IPC (pure calculation calls routed via modules in src/shared/modules/*)
 ipcMain.handle("calc:run", async (_e, { module, fn, payload }) => {
   try {
-    // dist-electron/main/main.js -> __dirname
-    // compiled shared ends up at dist-electron/shared/modules/<module>/index.js
     const target = path.join(__dirname, "../shared/modules", module, "index.js");
-    const mod = await import(`file://${target}`);
-    const impl = (mod?.[fn] ?? mod?.default?.[fn]);
-    if (typeof impl !== "function") throw new Error(`Function ${fn} not found in module ${module}`);
+    const mod = await import(pathToFileURL(target).href);
+    const impl = (mod as any)[fn] ?? (mod as any).default?.[fn];
+    if (typeof impl !== "function") {
+      throw new Error(`Function ${fn} not found in module ${module}`);
+    }
     return await impl(payload);
   } catch (err) {
     console.error("calc:run error", err);

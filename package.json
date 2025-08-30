@@ -7,10 +7,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently -k -n MAIN,RENDERER \"cross-env VITE_DEV_SERVER=true vite\" \"cross-env VITE_DEV_SERVER=true npm run dev:electron\"",
+    "dev": "concurrently -k -n BUILD,RENDERER,APP \"npm run dev:build:electron\" \"cross-env VITE_DEV_SERVER=true vite\" \"npm run dev:electron\"",
+    "dev:build:electron": "tsc -p tsconfig.electron.json -w",
     "dev:electron": "wait-on tcp:5173 && electron .",
-    "build:app": "vite build && npm run build:electron",
     "build:electron": "tsc -p tsconfig.electron.json",
+    "build:app": "vite build && npm run build:electron",
     "preview": "npm run build:app && electron .",
     "pack:installer": "npm run build:app && electron-builder",
     "lint": "eslint . --ext .ts,.tsx",
@@ -22,6 +23,7 @@
   "build": {
     "appId": "com.pg.creativespace.utility",
     "productName": "creative.space.utility",
+    "icon": "datasources/cs-utility.icns",
     "files": [
       "dist/**",
       "dist-electron/**",
