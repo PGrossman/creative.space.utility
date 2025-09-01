@@ -215,6 +215,30 @@ export default function StoragePerformance() {
     };
   }, [result, simultaneousUsers, readsPerUser, writesPerUser]);
 
+  // Network utilization calculation
+  const networkUtilization = useMemo(() => {
+    if (!networkInterface || bandwidthResults.totalGBps === 0) {
+      return { percentage: 0, maxBandwidth: 0 };
+    }
+    
+    // Convert network interface to GB/s (rough approximation)
+    const networkGBps = {
+      '1G': 0.125,    // 1 Gbps = 0.125 GB/s
+      '10G': 1.25,    // 10 Gbps = 1.25 GB/s
+      '25G': 3.125,   // 25 Gbps = 3.125 GB/s
+      '40G': 5.0,     // 40 Gbps = 5.0 GB/s
+      '50G': 6.25,    // 50 Gbps = 6.25 GB/s
+      '100G': 12.5    // 100 Gbps = 12.5 GB/s
+    }[networkInterface] || 1.25;
+    
+    const percentage = Math.min((bandwidthResults.totalGBps / networkGBps) * 100, 100);
+    
+    return {
+      percentage: percentage,
+      maxBandwidth: networkGBps
+    };
+  }, [bandwidthResults.totalGBps, networkInterface]);
+
   // No resets - just let calculations update automatically
   // The bitRateResults useMemo will handle finding valid combinations
   // If combination doesn't exist, show empty results but preserve selections
@@ -482,6 +506,161 @@ export default function StoragePerformance() {
               </span>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Network Bandwidth Utilization & Server Grid */}
+      <div className="mt-8">
+        {/* Network Bandwidth Utilization Bar */}
+        <div className="bg-blue-50 p-6 rounded-lg mb-8">
+          <h3 className="text-lg font-bold text-center mb-4 text-blue-600">
+            Network Bandwidth Utilization
+          </h3>
+          
+          <div className="relative w-full h-8 bg-gray-200 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-green-500 transition-all duration-300 ease-in-out"
+              style={{ width: `${networkUtilization.percentage}%` }}
+            ></div>
+            <div className="absolute inset-0 flex items-center justify-center text-sm font-medium text-gray-700">
+              {networkUtilization.percentage.toFixed(1)}%
+            </div>
+          </div>
+          
+          <div className="text-center mt-2 text-sm text-gray-600">
+            Maximum Bandwidth: {networkUtilization.maxBandwidth.toFixed(2)} GB/s
+          </div>
+        </div>
+
+        {/* Server Configuration Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          
+          {/* Portable */}
+          <div className="bg-white p-4 rounded-lg border shadow-sm">
+            <div className="text-blue-600 font-bold mb-2">Portable</div>
+            <div className="text-sm text-gray-600 mb-3">
+              <div>Storage: 16 TB</div>
+              <div>Hours: 433.60</div>
+            </div>
+            <div className="space-y-1 text-sm">
+              <div className={`${bandwidthResults.totalGBps > 4.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Read: 4.00 GB/s
+              </div>
+              <div className={`${bandwidthResults.totalGBps > 3.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Write: 3.00 GB/s
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-3">
+              <div>7.7" x 7.4" x 1.9"</div>
+              <div>1 x 120v</div>
+            </div>
+          </div>
+
+          {/* Desktop */}
+          <div className="bg-white p-4 rounded-lg border shadow-sm">
+            <div className="text-blue-600 font-bold mb-2">Desktop</div>
+            <div className="text-sm text-gray-600 mb-3">
+              <div>Storage: 32 TB</div>
+              <div>Hours: 867.21</div>
+            </div>
+            <div className="space-y-1 text-sm">
+              <div className={`${bandwidthResults.totalGBps > 15.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Read: 15.00 GB/s
+              </div>
+              <div className={`${bandwidthResults.totalGBps > 0.9 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Write: 0.90 GB/s
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-3">
+              <div>15.8" x 12.5" x 9"</div>
+              <div>1 x 120v</div>
+            </div>
+          </div>
+
+          {/* 12 Bay Server */}
+          <div className="bg-white p-4 rounded-lg border shadow-sm">
+            <div className="text-blue-600 font-bold mb-2">12 Bay Server</div>
+            <div className="text-sm text-gray-600 mb-3">
+              <div>Storage: 192 TB</div>
+              <div>Hours: 5203.25</div>
+            </div>
+            <div className="space-y-1 text-sm">
+              <div className={`${bandwidthResults.totalGBps > 8.50 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Read: 8.50 GB/s
+              </div>
+              <div className={`${bandwidthResults.totalGBps > 1.80 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Write: 1.80 GB/s
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-3">
+              <div>2RU x 22"</div>
+              <div>2 x 120v</div>
+            </div>
+          </div>
+
+          {/* 36 Bay Server */}
+          <div className="bg-white p-4 rounded-lg border shadow-sm">
+            <div className="text-blue-600 font-bold mb-2">36 Bay Server</div>
+            <div className="text-sm text-gray-600 mb-3">
+              <div>Storage: 576 TB</div>
+              <div>Hours: 15609.76</div>
+            </div>
+            <div className="space-y-1 text-sm">
+              <div className={`${bandwidthResults.totalGBps > 9.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Read: 9.00 GB/s
+              </div>
+              <div className={`${bandwidthResults.totalGBps > 5.40 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Write: 5.40 GB/s
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-3">
+              <div>4RU x 26.8"</div>
+              <div>2 x 120v</div>
+            </div>
+          </div>
+
+          {/* 60 Bay Server */}
+          <div className="bg-white p-4 rounded-lg border shadow-sm">
+            <div className="text-blue-600 font-bold mb-2">60 Bay Server</div>
+            <div className="text-sm text-gray-600 mb-3">
+              <div>Storage: 960 TB</div>
+              <div>Hours: 26016.26</div>
+            </div>
+            <div className="space-y-1 text-sm">
+              <div className={`${bandwidthResults.totalGBps > 24.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Read: 24.0 GB/s
+              </div>
+              <div className={`${bandwidthResults.totalGBps > 10.80 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Write: 10.80 GB/s
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-3">
+              <div>4RU x 37.4"</div>
+              <div>4 x 120v or 2 x 208v</div>
+            </div>
+          </div>
+
+          {/* 108 Bay Server */}
+          <div className="bg-white p-4 rounded-lg border shadow-sm">
+            <div className="text-blue-600 font-bold mb-2">108 Bay Server</div>
+            <div className="text-sm text-gray-600 mb-3">
+              <div>Storage: 1728 TB</div>
+              <div>Hours: 46829.27</div>
+            </div>
+            <div className="space-y-1 text-sm">
+              <div className={`${bandwidthResults.totalGBps > 24.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Read: 24.0 GB/s
+              </div>
+              <div className={`${bandwidthResults.totalGBps > 18.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Write: 18.0 GB/s
+              </div>
+            </div>
+            <div className="text-xs text-gray-500 mt-3">
+              <div>4RU x 41"</div>
+              <div>2 x 208v</div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
