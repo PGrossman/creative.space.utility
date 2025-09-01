@@ -42,16 +42,29 @@ export default function StorageSize() {
   const overheadPctDisplay = useMemo(() => Math.round(input.zfsOverheadPct * 100), [input.zfsOverheadPct]);
 
   useEffect(() => {
+    console.log('StorageSize: useEffect triggered with input:', input);
+    console.log('Window API available:', !!window.api);
+    
     (async () => {
       try {
+        if (!window.api) {
+          console.error('Window API not available');
+          setOut(null);
+          return;
+        }
+        
+        console.log('Calling calculator with:', { module: "storageCapacity", fn: "calcCapacity", payload: input });
+        
         const res = await window.api.calc({
           module: "storageCapacity",
           fn: "calcCapacity",
           payload: input
         });
+        
+        console.log('Calculator result:', res);
         setOut(res as Result);
       } catch (e) {
-        console.error(e);
+        console.error('Calculator error:', e);
         setOut(null);
       }
     })();
