@@ -75,19 +75,31 @@ export default function StoragePerformance() {
   // Get filtered frame rates based on selected resolution - SECOND level
   const availableFrameRates = useMemo(() => {
     if (!selectedResolution) return [];
-    const frameRates = codecData
-      .filter(item => item.resolution === selectedResolution)
-      .map(item => item.frame_rate);
-    return [...new Set(frameRates)].sort((a, b) => a - b);
+    
+    let frameRates = [...new Set(
+      codecData
+        .filter(item => item.resolution === selectedResolution)
+        .map(item => item.frame_rate)
+    )]
+      .sort((a, b) => a - b);
+    
+    // Replace 24.0 with 25.0 fps for better PAL compatibility
+    frameRates = frameRates.map(rate => rate === 24.0 ? 25.0 : rate);
+    
+    return frameRates;
   }, [codecData, selectedResolution]);
 
   // Get filtered codec families based on resolution + frame rate - THIRD level
   const codecFamilies = useMemo(() => {
     if (!selectedResolution || selectedFrameRate === null) return [];
+    
+    // Convert 25.0 fps selection back to 24.0 for data lookup
+    const lookupFrameRate = selectedFrameRate === 25.0 ? 24.0 : selectedFrameRate;
+    
     const families = codecData
       .filter(item => 
         item.resolution === selectedResolution &&
-        item.frame_rate === selectedFrameRate
+        item.frame_rate === lookupFrameRate
       )
       .map(item => item.codec_family);
     return [...new Set(families)].sort();
@@ -96,10 +108,14 @@ export default function StoragePerformance() {
   // Get filtered codecs based on resolution + frame rate + codec family - FOURTH level
   const availableCodecs = useMemo(() => {
     if (!selectedResolution || selectedFrameRate === null || !selectedFamily) return [];
+    
+    // Convert 25.0 fps selection back to 24.0 for data lookup
+    const lookupFrameRate = selectedFrameRate === 25.0 ? 24.0 : selectedFrameRate;
+    
     const codecs = codecData
       .filter(item => 
         item.resolution === selectedResolution &&
-        item.frame_rate === selectedFrameRate &&
+        item.frame_rate === lookupFrameRate &&
         item.codec_family === selectedFamily
       )
       .map(item => item.codec);
@@ -113,10 +129,13 @@ export default function StoragePerformance() {
       return;
     }
 
-    // Find the exact codec match - NEW ORDER
+    // Convert 25.0 fps selection back to 24.0 for data lookup
+    const lookupFrameRate = selectedFrameRate === 25.0 ? 24.0 : selectedFrameRate;
+
+    // Find the exact codec match using converted frame rate for lookup
     const codecMatch = codecData.find(item =>
       item.resolution === selectedResolution &&
-      item.frame_rate === selectedFrameRate &&
+      item.frame_rate === lookupFrameRate &&
       item.codec_family === selectedFamily &&
       item.codec === selectedCodec
     );
@@ -126,9 +145,14 @@ export default function StoragePerformance() {
       return;
     }
 
-    // Calculate storage metrics using your exact bitrate_MBps values
-    const mbpsRate = codecMatch.bitrate_MBps; // Already in MB/s from your JSON
-    const gbPerHour = (mbpsRate * 3600) / 1024; // Convert to GB/hour
+    // If we're showing 25fps, scale the 24fps bitrate by 25/24
+    const bitrateMultiplier = selectedFrameRate === 25.0 ? (25.0 / 24.0) : 1.0;
+    
+    // Calculate storage metrics using scaled bitrate_MBps values
+    const scaledMBps = codecMatch.bitrate_MBps * bitrateMultiplier;
+    const scaledMbps = codecMatch.bitrate_Mbps * bitrateMultiplier;
+    
+    const gbPerHour = (scaledMBps * 3600) / 1024; // Convert to GB/hour
     const tbPerHour = gbPerHour / 1024; // Convert to TB/hour
     const gbPerDay = gbPerHour * 24; // GB per day
     const tbPerDay = tbPerHour * 24; // TB per day
@@ -136,8 +160,16 @@ export default function StoragePerformance() {
     const hoursPerGB = 1 / gbPerHour; // Hours that fit in 1GB
     const hoursPerTB = 1 / tbPerHour; // Hours that fit in 1TB
 
+    // Create a scaled codec data object for display
+    const scaledCodecData = {
+      ...codecMatch,
+      frame_rate: selectedFrameRate, // Show the selected frame rate (25.0)
+      bitrate_Mbps: scaledMbps,
+      bitrate_MBps: scaledMBps
+    };
+
     setResult({
-      selectedCodec: codecMatch,
+      selectedCodec: scaledCodecData,
       hoursPerGB,
       hoursPerTB,
       gbPerHour,
