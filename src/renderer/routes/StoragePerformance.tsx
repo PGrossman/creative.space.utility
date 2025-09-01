@@ -147,21 +147,113 @@ export default function StoragePerformance() {
     });
   }, [codecData, selectedFamily, selectedResolution, selectedFrameRate, selectedCodec]);
 
-  // Reset dependent selections when parent changes - NEW CASCADING ORDER
+  // Smart validation - preserve selections when possible, only reset when invalid
+  
+  // Smart validation when resolution changes
   useEffect(() => {
-    setSelectedFrameRate(null);
-    setSelectedFamily('');
-    setSelectedCodec('');
-  }, [selectedResolution]);
+    if (!selectedResolution) return;
+    
+    // Check if current frame rate is still valid for new resolution
+    const validFrameRates = [...new Set(
+      codecData
+        .filter(item => item.resolution === selectedResolution)
+        .map(item => item.frame_rate)
+    )];
+    
+    if (selectedFrameRate && !validFrameRates.includes(selectedFrameRate)) {
+      setSelectedFrameRate(null);
+      setSelectedFamily('');
+      setSelectedCodec('');
+    } else if (selectedFrameRate) {
+      // Frame rate is still valid, check codec family
+      const validFamilies = [...new Set(
+        codecData
+          .filter(item => 
+            item.resolution === selectedResolution && 
+            item.frame_rate === selectedFrameRate
+          )
+          .map(item => item.codec_family)
+      )];
+      
+      if (selectedFamily && !validFamilies.includes(selectedFamily)) {
+        setSelectedFamily('');
+        setSelectedCodec('');
+      } else if (selectedFamily) {
+        // Codec family is still valid, check specific codec
+        const validCodecs = [...new Set(
+          codecData
+            .filter(item => 
+              item.resolution === selectedResolution && 
+              item.frame_rate === selectedFrameRate &&
+              item.codec_family === selectedFamily
+            )
+            .map(item => item.codec)
+        )];
+        
+        if (selectedCodec && !validCodecs.includes(selectedCodec)) {
+          setSelectedCodec('');
+        }
+        // If codec is still valid, keep it selected and calculation will update
+      }
+    }
+  }, [codecData, selectedResolution, selectedFrameRate, selectedFamily, selectedCodec]);
 
+  // Smart validation when frame rate changes
   useEffect(() => {
-    setSelectedFamily('');
-    setSelectedCodec('');
-  }, [selectedFrameRate]);
+    if (!selectedFrameRate || !selectedResolution) return;
+    
+    // Check if current codec family is still valid
+    const validFamilies = [...new Set(
+      codecData
+        .filter(item => 
+          item.resolution === selectedResolution && 
+          item.frame_rate === selectedFrameRate
+        )
+        .map(item => item.codec_family)
+    )];
+    
+    if (selectedFamily && !validFamilies.includes(selectedFamily)) {
+      setSelectedFamily('');
+      setSelectedCodec('');
+    } else if (selectedFamily) {
+      // Codec family is still valid, check specific codec
+      const validCodecs = [...new Set(
+        codecData
+          .filter(item => 
+            item.resolution === selectedResolution && 
+            item.frame_rate === selectedFrameRate &&
+            item.codec_family === selectedFamily
+          )
+          .map(item => item.codec)
+      )];
+      
+      if (selectedCodec && !validCodecs.includes(selectedCodec)) {
+        setSelectedCodec('');
+      }
+      // If codec is still valid, keep it and calculation will update automatically
+    }
+  }, [codecData, selectedResolution, selectedFrameRate, selectedFamily, selectedCodec]);
 
+  // Smart validation when codec family changes
   useEffect(() => {
-    setSelectedCodec('');
-  }, [selectedFamily]);
+    if (!selectedFamily || !selectedResolution || selectedFrameRate === null) return;
+    
+    // Check if current codec is still valid
+    const validCodecs = [...new Set(
+      codecData
+        .filter(item => 
+          item.resolution === selectedResolution && 
+          item.frame_rate === selectedFrameRate &&
+          item.codec_family === selectedFamily
+        )
+        .map(item => item.codec)
+    )];
+    
+    if (selectedCodec && !validCodecs.includes(selectedCodec)) {
+      setSelectedCodec('');
+    }
+    // If codec is still valid, keep it and calculation will update automatically
+  }, [codecData, selectedResolution, selectedFrameRate, selectedFamily, selectedCodec]);
 
   // Utility functions for smart unit display
   const formatStorage = (gb: number) => {
