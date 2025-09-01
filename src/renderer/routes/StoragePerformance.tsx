@@ -66,45 +66,45 @@ export default function StoragePerformance() {
     loadCodecData();
   }, []);
 
-  // Get unique codec families
-  const codecFamilies = useMemo(() => {
-    const families = [...new Set(codecData.map(item => item.codec_family))];
-    return families.sort();
+  // Get unique resolutions - FIRST level (show all available)
+  const availableResolutions = useMemo(() => {
+    const resolutions = [...new Set(codecData.map(item => item.resolution))];
+    return resolutions.sort();
   }, [codecData]);
 
-  // Get filtered resolutions based on selected family
-  const availableResolutions = useMemo(() => {
-    if (!selectedFamily) return [];
-    const resolutions = codecData
-      .filter(item => item.codec_family === selectedFamily)
-      .map(item => item.resolution);
-    return [...new Set(resolutions)].sort();
-  }, [codecData, selectedFamily]);
-
-  // Get filtered frame rates based on family + resolution
+  // Get filtered frame rates based on selected resolution - SECOND level
   const availableFrameRates = useMemo(() => {
-    if (!selectedFamily || !selectedResolution) return [];
+    if (!selectedResolution) return [];
     const frameRates = codecData
-      .filter(item => 
-        item.codec_family === selectedFamily && 
-        item.resolution === selectedResolution
-      )
+      .filter(item => item.resolution === selectedResolution)
       .map(item => item.frame_rate);
     return [...new Set(frameRates)].sort((a, b) => a - b);
-  }, [codecData, selectedFamily, selectedResolution]);
+  }, [codecData, selectedResolution]);
 
-  // Get filtered codecs based on family + resolution + frame rate
-  const availableCodecs = useMemo(() => {
-    if (!selectedFamily || !selectedResolution || selectedFrameRate === null) return [];
-    const codecs = codecData
+  // Get filtered codec families based on resolution + frame rate - THIRD level
+  const codecFamilies = useMemo(() => {
+    if (!selectedResolution || selectedFrameRate === null) return [];
+    const families = codecData
       .filter(item => 
-        item.codec_family === selectedFamily && 
         item.resolution === selectedResolution &&
         item.frame_rate === selectedFrameRate
       )
+      .map(item => item.codec_family);
+    return [...new Set(families)].sort();
+  }, [codecData, selectedResolution, selectedFrameRate]);
+
+  // Get filtered codecs based on resolution + frame rate + codec family - FOURTH level
+  const availableCodecs = useMemo(() => {
+    if (!selectedResolution || selectedFrameRate === null || !selectedFamily) return [];
+    const codecs = codecData
+      .filter(item => 
+        item.resolution === selectedResolution &&
+        item.frame_rate === selectedFrameRate &&
+        item.codec_family === selectedFamily
+      )
       .map(item => item.codec);
     return [...new Set(codecs)].sort();
-  }, [codecData, selectedFamily, selectedResolution, selectedFrameRate]);
+  }, [codecData, selectedResolution, selectedFrameRate, selectedFamily]);
 
   // Calculate storage requirements when all selections are made
   useEffect(() => {
@@ -113,11 +113,11 @@ export default function StoragePerformance() {
       return;
     }
 
-    // Find the exact codec match
+    // Find the exact codec match - NEW ORDER
     const codecMatch = codecData.find(item =>
-      item.codec_family === selectedFamily &&
       item.resolution === selectedResolution &&
       item.frame_rate === selectedFrameRate &&
+      item.codec_family === selectedFamily &&
       item.codec === selectedCodec
     );
 
@@ -147,21 +147,21 @@ export default function StoragePerformance() {
     });
   }, [codecData, selectedFamily, selectedResolution, selectedFrameRate, selectedCodec]);
 
-  // Reset dependent selections when parent changes
-  useEffect(() => {
-    setSelectedResolution('');
-    setSelectedFrameRate(null);
-    setSelectedCodec('');
-  }, [selectedFamily]);
-
+  // Reset dependent selections when parent changes - NEW CASCADING ORDER
   useEffect(() => {
     setSelectedFrameRate(null);
+    setSelectedFamily('');
     setSelectedCodec('');
   }, [selectedResolution]);
 
   useEffect(() => {
+    setSelectedFamily('');
     setSelectedCodec('');
   }, [selectedFrameRate]);
+
+  useEffect(() => {
+    setSelectedCodec('');
+  }, [selectedFamily]);
 
   // Utility functions for smart unit display
   const formatStorage = (gb: number) => {
@@ -205,29 +205,13 @@ export default function StoragePerformance() {
       <div className="border rounded-xl p-5 bg-white/50">
         <h3 className="font-semibold mb-4">Codec Selection</h3>
 
-        {/* Codec Family */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Codec Family:</label>
-          <select
-            className="w-full border rounded p-2"
-            value={selectedFamily}
-            onChange={(e) => setSelectedFamily(e.target.value)}
-          >
-            <option value="">Select Codec Family</option>
-            {codecFamilies.map(family => (
-              <option key={family} value={family}>{family}</option>
-            ))}
-          </select>
-        </div>
-
-        {/* Resolution */}
+        {/* Resolution - FIRST */}
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2">Resolution:</label>
           <select
             className="w-full border rounded p-2"
             value={selectedResolution}
             onChange={(e) => setSelectedResolution(e.target.value)}
-            disabled={!selectedFamily}
           >
             <option value="">Select Resolution</option>
             {availableResolutions.map(resolution => (
@@ -236,7 +220,7 @@ export default function StoragePerformance() {
           </select>
         </div>
 
-        {/* Frame Rate (moved below Resolution) */}
+        {/* Frame Rate - SECOND */}
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2">Frame Rate:</label>
           <select
@@ -252,14 +236,30 @@ export default function StoragePerformance() {
           </select>
         </div>
 
-        {/* Codec */}
+        {/* Codec Family - THIRD */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium mb-2">Codec Family:</label>
+          <select
+            className="w-full border rounded p-2"
+            value={selectedFamily}
+            onChange={(e) => setSelectedFamily(e.target.value)}
+            disabled={selectedFrameRate === null}
+          >
+            <option value="">Select Codec Family</option>
+            {codecFamilies.map(family => (
+              <option key={family} value={family}>{family}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Codec - FOURTH */}
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2">Codec:</label>
           <select
             className="w-full border rounded p-2"
             value={selectedCodec}
             onChange={(e) => setSelectedCodec(e.target.value)}
-            disabled={selectedFrameRate === null}
+            disabled={!selectedFamily}
           >
             <option value="">Select Codec</option>
             {availableCodecs.map(codec => (
