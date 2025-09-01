@@ -533,7 +533,7 @@ export default function StoragePerformance() {
         </div>
 
         {/* Server Configuration Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+        <div className="grid grid-cols-6 gap-4 min-w-0">
           
           {/* Portable */}
           <div className="bg-white p-4 rounded-lg border shadow-sm">
