@@ -533,16 +533,16 @@ export default function StoragePerformance() {
         </div>
 
         {/* Server Configuration Grid */}
-        <div className="grid grid-cols-6 gap-4 min-w-0">
+        <div className="flex gap-4 overflow-x-auto pb-4">
           
           {/* Portable */}
-          <div className="bg-white p-4 rounded-lg border shadow-sm">
+          <div className="flex-shrink-0 bg-white p-4 rounded-lg border shadow-sm min-w-[180px]">
             <div className="text-blue-600 font-bold mb-2">Portable</div>
             <div className="text-sm text-gray-600 mb-3">
               <div>Storage: 16 TB</div>
               <div>Hours: 433.60</div>
             </div>
-            <div className="space-y-1 text-sm">
+            <div className="space-y-1 text-sm mb-3">
               <div className={`${bandwidthResults.totalGBps > 4.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
                 Read: 4.00 GB/s
               </div>
@@ -550,20 +550,20 @@ export default function StoragePerformance() {
                 Write: 3.00 GB/s
               </div>
             </div>
-            <div className="text-xs text-gray-500 mt-3">
+            <div className="text-xs text-gray-500">
               <div>7.7" x 7.4" x 1.9"</div>
               <div>1 x 120v</div>
             </div>
           </div>
 
           {/* Desktop */}
-          <div className="bg-white p-4 rounded-lg border shadow-sm">
+          <div className="flex-shrink-0 bg-white p-4 rounded-lg border shadow-sm min-w-[180px]">
             <div className="text-blue-600 font-bold mb-2">Desktop</div>
             <div className="text-sm text-gray-600 mb-3">
               <div>Storage: 32 TB</div>
               <div>Hours: 867.21</div>
             </div>
-            <div className="space-y-1 text-sm">
+            <div className="space-y-1 text-sm mb-3">
               <div className={`${bandwidthResults.totalGBps > 15.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
                 Read: 15.00 GB/s
               </div>
@@ -571,20 +571,20 @@ export default function StoragePerformance() {
                 Write: 0.90 GB/s
               </div>
             </div>
-            <div className="text-xs text-gray-500 mt-3">
+            <div className="text-xs text-gray-500">
               <div>15.8" x 12.5" x 9"</div>
               <div>1 x 120v</div>
             </div>
           </div>
 
           {/* 12 Bay Server */}
-          <div className="bg-white p-4 rounded-lg border shadow-sm">
+          <div className="flex-shrink-0 bg-white p-4 rounded-lg border shadow-sm min-w-[180px]">
             <div className="text-blue-600 font-bold mb-2">12 Bay Server</div>
             <div className="text-sm text-gray-600 mb-3">
               <div>Storage: 192 TB</div>
               <div>Hours: 5203.25</div>
             </div>
-            <div className="space-y-1 text-sm">
+            <div className="space-y-1 text-sm mb-3">
               <div className={`${bandwidthResults.totalGBps > 8.50 ? 'text-red-600' : 'text-green-600'} font-medium`}>
                 Read: 8.50 GB/s
               </div>
@@ -592,20 +592,20 @@ export default function StoragePerformance() {
                 Write: 1.80 GB/s
               </div>
             </div>
-            <div className="text-xs text-gray-500 mt-3">
+            <div className="text-xs text-gray-500">
               <div>2RU x 22"</div>
               <div>2 x 120v</div>
             </div>
           </div>
 
           {/* 36 Bay Server */}
-          <div className="bg-white p-4 rounded-lg border shadow-sm">
+          <div className="flex-shrink-0 bg-white p-4 rounded-lg border shadow-sm min-w-[180px]">
             <div className="text-blue-600 font-bold mb-2">36 Bay Server</div>
             <div className="text-sm text-gray-600 mb-3">
               <div>Storage: 576 TB</div>
               <div>Hours: 15609.76</div>
             </div>
-            <div className="space-y-1 text-sm">
+            <div className="space-y-1 text-sm mb-3">
               <div className={`${bandwidthResults.totalGBps > 9.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
                 Read: 9.00 GB/s
               </div>
@@ -613,20 +613,20 @@ export default function StoragePerformance() {
                 Write: 5.40 GB/s
               </div>
             </div>
-            <div className="text-xs text-gray-500 mt-3">
+            <div className="text-xs text-gray-500">
               <div>4RU x 26.8"</div>
               <div>2 x 120v</div>
             </div>
           </div>
 
           {/* 60 Bay Server */}
-          <div className="bg-white p-4 rounded-lg border shadow-sm">
+          <div className="flex-shrink-0 bg-white p-4 rounded-lg border shadow-sm min-w-[180px]">
             <div className="text-blue-600 font-bold mb-2">60 Bay Server</div>
             <div className="text-sm text-gray-600 mb-3">
               <div>Storage: 960 TB</div>
               <div>Hours: 26016.26</div>
             </div>
-            <div className="space-y-1 text-sm">
+            <div className="space-y-1 text-sm mb-3">
               <div className={`${bandwidthResults.totalGBps > 24.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
                 Read: 24.0 GB/s
               </div>
@@ -634,20 +634,20 @@ export default function StoragePerformance() {
                 Write: 10.80 GB/s
               </div>
             </div>
-            <div className="text-xs text-gray-500 mt-3">
+            <div className="text-xs text-gray-500">
               <div>4RU x 37.4"</div>
               <div>4 x 120v or 2 x 208v</div>
             </div>
           </div>
 
           {/* 108 Bay Server */}
-          <div className="bg-white p-4 rounded-lg border shadow-sm">
+          <div className="flex-shrink-0 bg-white p-4 rounded-lg border shadow-sm min-w-[180px]">
             <div className="text-blue-600 font-bold mb-2">108 Bay Server</div>
             <div className="text-sm text-gray-600 mb-3">
               <div>Storage: 1728 TB</div>
               <div>Hours: 46829.27</div>
             </div>
-            <div className="space-y-1 text-sm">
+            <div className="space-y-1 text-sm mb-3">
               <div className={`${bandwidthResults.totalGBps > 24.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
                 Read: 24.0 GB/s
               </div>
@@ -655,7 +655,7 @@ export default function StoragePerformance() {
                 Write: 18.0 GB/s
               </div>
             </div>
-            <div className="text-xs text-gray-500 mt-3">
+            <div className="text-xs text-gray-500">
               <div>4RU x 41"</div>
               <div>2 x 208v</div>
             </div>
