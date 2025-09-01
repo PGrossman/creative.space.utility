@@ -280,7 +280,9 @@ export default function StoragePerformance() {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="p-6">
+      {/* Two-column layout for CODEC Selection and Client */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       {/* Left: Codec Selection */}
       <div className="border rounded-xl p-5 bg-white/50">
         <h3 className="font-semibold mb-4">Codec Selection</h3>
@@ -508,8 +510,10 @@ export default function StoragePerformance() {
           </div>
         </div>
       </div>
+      
+      </div> {/* END of two-column grid */}
 
-      {/* Network Bandwidth Utilization & Server Grid */}
+      {/* Network Bandwidth Utilization & Server Grid - FULL WIDTH */}
       <div className="mt-8">
         {/* Network Bandwidth Utilization Bar */}
         <div className="bg-blue-50 p-6 rounded-lg mb-8">
@@ -532,11 +536,11 @@ export default function StoragePerformance() {
           </div>
         </div>
 
-        {/* Server Configuration Grid */}
-        <div className="flex gap-4 overflow-x-auto pb-4">
+        {/* Server Configuration Grid - NO SCROLL */}
+        <div className="grid grid-cols-6 gap-4">
           
           {/* Portable */}
-          <div className="flex-shrink-0 bg-white p-4 rounded-lg border shadow-sm min-w-[180px]">
+          <div className="bg-white p-4 rounded-lg border shadow-sm">
             <div className="text-blue-600 font-bold mb-2">Portable</div>
             <div className="text-sm text-gray-600 mb-3">
               <div>Storage: 16 TB</div>
@@ -557,7 +561,7 @@ export default function StoragePerformance() {
           </div>
 
           {/* Desktop */}
-          <div className="flex-shrink-0 bg-white p-4 rounded-lg border shadow-sm min-w-[180px]">
+          <div className="bg-white p-4 rounded-lg border shadow-sm">
             <div className="text-blue-600 font-bold mb-2">Desktop</div>
             <div className="text-sm text-gray-600 mb-3">
               <div>Storage: 32 TB</div>
@@ -578,7 +582,7 @@ export default function StoragePerformance() {
           </div>
 
           {/* 12 Bay Server */}
-          <div className="flex-shrink-0 bg-white p-4 rounded-lg border shadow-sm min-w-[180px]">
+          <div className="bg-white p-4 rounded-lg border shadow-sm">
             <div className="text-blue-600 font-bold mb-2">12 Bay Server</div>
             <div className="text-sm text-gray-600 mb-3">
               <div>Storage: 192 TB</div>
@@ -599,7 +603,7 @@ export default function StoragePerformance() {
           </div>
 
           {/* 36 Bay Server */}
-          <div className="flex-shrink-0 bg-white p-4 rounded-lg border shadow-sm min-w-[180px]">
+          <div className="bg-white p-4 rounded-lg border shadow-sm">
             <div className="text-blue-600 font-bold mb-2">36 Bay Server</div>
             <div className="text-sm text-gray-600 mb-3">
               <div>Storage: 576 TB</div>
@@ -620,7 +624,7 @@ export default function StoragePerformance() {
           </div>
 
           {/* 60 Bay Server */}
-          <div className="flex-shrink-0 bg-white p-4 rounded-lg border shadow-sm min-w-[180px]">
+          <div className="bg-white p-4 rounded-lg border shadow-sm">
             <div className="text-blue-600 font-bold mb-2">60 Bay Server</div>
             <div className="text-sm text-gray-600 mb-3">
               <div>Storage: 960 TB</div>
@@ -641,7 +645,7 @@ export default function StoragePerformance() {
           </div>
 
           {/* 108 Bay Server */}
-          <div className="flex-shrink-0 bg-white p-4 rounded-lg border shadow-sm min-w-[180px]">
+          <div className="bg-white p-4 rounded-lg border shadow-sm">
             <div className="text-blue-600 font-bold mb-2">108 Bay Server</div>
             <div className="text-sm text-gray-600 mb-3">
               <div>Storage: 1728 TB</div>
@@ -663,6 +667,7 @@ export default function StoragePerformance() {
 
         </div>
       </div>
+
     </div>
   );
 }
