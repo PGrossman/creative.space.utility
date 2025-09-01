@@ -34,6 +34,12 @@ export default function StoragePerformance() {
   const [selectedFrameRate, setSelectedFrameRate] = useState<number | null>(null);
   const [selectedCodec, setSelectedCodec] = useState<string>('');
   
+  // Client bandwidth calculator state
+  const [simultaneousUsers, setSimultaneousUsers] = useState<number>(1);
+  const [readsPerUser, setReadsPerUser] = useState<number>(2);
+  const [writesPerUser, setWritesPerUser] = useState<number>(1);
+  const [networkInterface, setNetworkInterface] = useState<string>('10G');
+  
   // Result state
   const [result, setResult] = useState<StorageResult | null>(null);
 
@@ -179,6 +185,36 @@ export default function StoragePerformance() {
     });
   }, [codecData, selectedFamily, selectedResolution, selectedFrameRate, selectedCodec]);
 
+  // Client bandwidth calculations
+  const bandwidthResults = useMemo(() => {
+    if (!result?.selectedCodec) {
+      return {
+        totalGbps: 0,
+        totalGBps: 0,
+        storageUsageTBhr: 0
+      };
+    }
+
+    // Calculate total operations
+    const totalOperations = simultaneousUsers * (readsPerUser + writesPerUser);
+    
+    // Calculate bandwidth requirements
+    const totalMbps = result.selectedCodec.bitrate_Mbps * totalOperations;
+    const totalGbps = totalMbps / 1000; // Convert to Gbps
+    const totalGBps = totalMbps / 8 / 1000; // Convert to GB/s (divide by 8 for bits to bytes, then 1000 for GB)
+    
+    // Calculate storage usage in TB/hr
+    const totalMBps = result.selectedCodec.bitrate_MBps * totalOperations;
+    const storagePerHourGB = (totalMBps * 3600) / 1024; // Convert to GB/hr
+    const storageUsageTBhr = storagePerHourGB / 1000; // Convert to TB/hr
+
+    return {
+      totalGbps: totalGbps,
+      totalGBps: totalGBps,
+      storageUsageTBhr: storageUsageTBhr
+    };
+  }, [result, simultaneousUsers, readsPerUser, writesPerUser]);
+
   // No resets - just let calculations update automatically
   // The bitRateResults useMemo will handle finding valid combinations
   // If combination doesn't exist, show empty results but preserve selections
@@ -304,94 +340,148 @@ export default function StoragePerformance() {
         )}
       </div>
 
-      {/* Right: Storage Calculations */}
-      <div className="space-y-4">
-        {/* Storage per Time */}
-        <div className="border rounded-xl p-5 bg-white/50">
-          <h3 className="font-semibold mb-4">Storage Requirements</h3>
-          {result ? (
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Per Hour:</span>
-                <span className="font-medium">{formatStorage(result.gbPerHour)}</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Per Day (24h):</span>
-                <span className="font-medium">
-                  {result.gbPerDay < 1024 
-                    ? `${result.gbPerDay.toFixed(1)} GB/day`
-                    : `${result.tbPerDay.toFixed(2)} TB/day`
-                  }
-                </span>
-              </div>
-              <div className="mt-4 pt-4 border-t">
-                <div className="text-lg font-bold text-center">
-                  {result.tbPerHour >= 1 
-                    ? `${result.tbPerHour.toFixed(3)} TB/hr`
-                    : `${result.gbPerHour.toFixed(2)} GB/hr`
-                  }
-                </div>
-              </div>
+      {/* Right: Client Bandwidth Calculator */}
+      <div className="border rounded-xl p-5 bg-white/50">
+        <h2 className="text-xl font-bold mb-6 text-center">Client</h2>
+        
+        {/* Simultaneous Users */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Simultaneous Users:
+          </label>
+          <div className="relative">
+            <input
+              type="number"
+              min="1"
+              value={simultaneousUsers}
+              onChange={(e) => setSimultaneousUsers(Math.max(1, parseInt(e.target.value) || 1))}
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <div className="absolute right-2 top-2 flex flex-col">
+              <button
+                type="button"
+                onClick={() => setSimultaneousUsers(prev => prev + 1)}
+                className="text-xs px-1 hover:bg-gray-200"
+              >
+                ▲
+              </button>
+              <button
+                type="button"
+                onClick={() => setSimultaneousUsers(prev => Math.max(1, prev - 1))}
+                className="text-xs px-1 hover:bg-gray-200"
+              >
+                ▼
+              </button>
             </div>
-          ) : (
-            <div className="text-gray-500 text-center py-8">
-              Select all codec parameters to see storage calculations
-            </div>
-          )}
+          </div>
         </div>
 
-        {/* Recording Duration */}
-        <div className="border rounded-xl p-5 bg-white/50">
-          <h3 className="font-semibold mb-4">Recording Duration</h3>
-          {result ? (
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Per 1 GB:</span>
-                <span className="font-medium">{formatDuration(result.hoursPerGB)}</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Per 1 TB:</span>
-                <span className="font-medium">{formatDuration(result.hoursPerTB)}</span>
-              </div>
-              <div className="mt-4 pt-4 border-t">
-                <div className="text-lg font-bold text-center">
-                  {result.hoursPerTB < 24 
-                    ? `${result.hoursPerTB.toFixed(1)} hrs/TB`
-                    : `${(result.hoursPerTB / 24).toFixed(1)} days/TB`
-                  }
-                </div>
-              </div>
+        {/* Reads per User */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Reads per User:
+          </label>
+          <div className="relative">
+            <input
+              type="number"
+              min="0"
+              value={readsPerUser}
+              onChange={(e) => setReadsPerUser(Math.max(0, parseInt(e.target.value) || 0))}
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <div className="absolute right-2 top-2 flex flex-col">
+              <button
+                type="button"
+                onClick={() => setReadsPerUser(prev => prev + 1)}
+                className="text-xs px-1 hover:bg-gray-200"
+              >
+                ▲
+              </button>
+              <button
+                type="button"
+                onClick={() => setReadsPerUser(prev => Math.max(0, prev - 1))}
+                className="text-xs px-1 hover:bg-gray-200"
+              >
+                ▼
+              </button>
             </div>
-          ) : (
-            <div className="text-gray-500 text-center py-8">
-              Duration calculations will appear here
-            </div>
-          )}
+          </div>
         </div>
 
-        {/* Data Rate Info */}
-        <div className="border rounded-xl p-5 bg-white/50">
-          <h3 className="font-semibold mb-4">Technical Details</h3>
-          {result ? (
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Bitrate:</span>
-                <span className="font-medium">{result.selectedCodec.bitrate_Mbps.toFixed(2)} Mbps</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Data Rate:</span>
-                <span className="font-medium">{result.selectedCodec.bitrate_MBps.toFixed(2)} MB/s</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Codec Family:</span>
-                <span className="font-medium">{result.selectedCodec.codec_family}</span>
-              </div>
+        {/* Writes per User */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Writes per User:
+          </label>
+          <div className="relative">
+            <input
+              type="number"
+              min="0"
+              value={writesPerUser}
+              onChange={(e) => setWritesPerUser(Math.max(0, parseInt(e.target.value) || 0))}
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <div className="absolute right-2 top-2 flex flex-col">
+              <button
+                type="button"
+                onClick={() => setWritesPerUser(prev => prev + 1)}
+                className="text-xs px-1 hover:bg-gray-200"
+              >
+                ▲
+              </button>
+              <button
+                type="button"
+                onClick={() => setWritesPerUser(prev => Math.max(0, prev - 1))}
+                className="text-xs px-1 hover:bg-gray-200"
+              >
+                ▼
+              </button>
             </div>
-          ) : (
-            <div className="text-gray-500 text-center py-8">
-              Technical details will appear here
+          </div>
+        </div>
+
+        {/* Network Interface */}
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Network Interface:
+          </label>
+          <select
+            value={networkInterface}
+            onChange={(e) => setNetworkInterface(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="1G">1G</option>
+            <option value="10G">10G</option>
+            <option value="25G">25G</option>
+            <option value="40G">40G</option>
+            <option value="50G">50G</option>
+            <option value="100G">100G</option>
+          </select>
+        </div>
+
+        {/* Total Bandwidth Required */}
+        <div className="bg-white p-4 rounded border">
+          <h3 className="font-bold text-gray-800 mb-3">Total Bandwidth Required:</h3>
+          <div className="space-y-2">
+            <div className="flex justify-between">
+              <span className="text-gray-600">Gigabits per second:</span>
+              <span className="font-medium">
+                {bandwidthResults.totalGbps.toFixed(2)} Gbps
+              </span>
             </div>
-          )}
+            <div className="flex justify-between">
+              <span className="text-gray-600">Gigabytes per second:</span>
+              <span className="font-medium">
+                {bandwidthResults.totalGBps.toFixed(2)} GB/s
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Storage Usage:</span>
+              <span className="font-medium">
+                {bandwidthResults.storageUsageTBhr.toFixed(2)} TB/hr
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
