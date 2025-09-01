@@ -46,7 +46,7 @@ export default function StorageSize() {
       try {
         const res = await window.api.calc({
           module: "storageCapacity",
-          fn: "run",
+          fn: "calcCapacity",
           payload: input
         });
         setOut(res as Result);
@@ -59,8 +59,8 @@ export default function StorageSize() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {/* Left panel — Drive Configuration */}
-      <div className="border rounded-xl p-5">
+      {/* Left: inputs */}
+      <div className="border rounded-xl p-5 bg-white/50">
         <h3 className="font-semibold mb-4">Drive Configuration</h3>
 
         <Field label="RAID Type:">
@@ -126,7 +126,7 @@ export default function StorageSize() {
         </div>
       </div>
 
-      {/* Right panel — Results */}
+      {/* Right: results */}
       <div className="grid gap-5">
         <Card title="Usable Storage">
           <StatRow name="Total Capacity:" value={out ? TB(out.rawTb) : "—"} />
@@ -184,7 +184,7 @@ function NumberInput({
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="border rounded-xl p-5">
+    <div className="border rounded-xl p-5 bg-white/50">
       <h3 className="font-semibold mb-3">{title}</h3>
       {children}
     </div>

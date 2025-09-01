@@ -49,4 +49,3 @@ export function calcCapacity(i: CapacityInput): CapacityResult {
 }
 
 export default { calcCapacity };
-export { calcCapacity as run };
