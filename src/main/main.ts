@@ -1,66 +1,68 @@
-import { app, BrowserWindow, ipcMain } from "electron";
-import path from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
-import { registerAppMenu } from "./app-menu.js";
+import { app, BrowserWindow, ipcMain } from 'electron'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-let win: BrowserWindow | null = null;
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+let mainWindow: BrowserWindow | null = null
 
-// Check if we're in development mode by looking for the dev server
-const isDev = process.env.VITE_DEV_SERVER === "true";
+const isDev = process.env.NODE_ENV === 'development'
 
-async function createWindow() {
-  win = new BrowserWindow({
+function createWindow() {
+  mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
-          webPreferences: {
-        contextIsolation: true,
-        preload: path.join(__dirname, "../preload/preload.js"),
-        nodeIntegration: false,
-        sandbox: false
-      },
-    title: "creative.space.utility"
-  });
-
-  registerAppMenu();
+    webPreferences: {
+      contextIsolation: true,
+      nodeIntegration: false,
+      preload: path.join(__dirname, 'preload.js')
+    },
+    title: 'creative.space.utility'
+  })
 
   if (isDev) {
-    await win.loadURL("http://localhost:5173");
-    win.webContents.openDevTools({ mode: "detach" });
+    mainWindow.loadURL('http://localhost:5173')
+    mainWindow.webContents.openDevTools()
   } else {
-    await win.loadFile(path.join(__dirname, "../../dist/index.html"));
+    mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'))
   }
-
-  win.on("closed", () => {
-    win = null;
-    app.quit();   // force quit when window is closed
-  });
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(createWindow)
 
-app.on("window-all-closed", () => {
-  // Quit on all platforms
-  app.quit();
-});
-
-app.on("activate", () => {
-  // On mac, normally you'd re-open — but since you want quit-on-close,
-  // you can leave this empty or just log if needed.
-});
-
-// IPC (pure calculation calls routed via modules in src/shared/modules/*)
-ipcMain.handle("calc:run", async (_e, { module, fn, payload }) => {
-  try {
-    const target = path.join(__dirname, "../shared/modules", module, "index.js");
-    const mod = await import(pathToFileURL(target).href);
-    const impl = (mod as any)[fn] ?? (mod as any).default?.[fn];
-    if (typeof impl !== "function") {
-      throw new Error(`Function ${fn} not found in module ${module}`);
-    }
-    return await impl(payload);
-  } catch (err) {
-    console.error("calc:run error", err);
-    throw err;
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit()
   }
-});
+})
+
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow()
+  }
+})
+
+// IPC Handlers
+ipcMain.handle('calc:run', async (event, { module, fn, payload }) => {
+  console.log(`Running calculation: ${module}.${fn}`, payload)
+  
+  try {
+    // Import calculator module
+    const modulePath = isDev 
+      ? path.join(__dirname, '..', 'src', 'shared', 'modules', module, 'index.mjs')
+      : path.join(process.resourcesPath, 'shared', 'modules', module, 'index.mjs')
+    
+    const calculator = await import(modulePath)
+    const calcFunction = calculator[fn]
+    
+    if (typeof calcFunction !== 'function') {
+      throw new Error(`Function ${fn} not found in module ${module}`)
+    }
+    
+    const result = await calcFunction(payload)
+    console.log(`Calculation result:`, result)
+    return result
+  } catch (error) {
+    console.error(`Calculation error:`, error)
+    throw error
+  }
+})

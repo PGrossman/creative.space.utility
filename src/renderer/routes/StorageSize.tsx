@@ -49,6 +49,9 @@ export default function StorageSize() {
           fn: "calcCapacity",
           payload: input
         });
+        
+        // Successfully calculated storage values
+        
         setOut(res as Result);
       } catch (e) {
         console.error(e);

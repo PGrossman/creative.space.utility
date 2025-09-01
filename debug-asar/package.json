@@ -1,0 +1,6 @@
+{
+  "name": "creative-space-utility",
+  "version": "1.0.0",
+  "description": "Utility Calculator for creative.space",
+  "main": "dist-electron/main.js"
+}

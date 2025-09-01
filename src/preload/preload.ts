@@ -1,18 +1,17 @@
-import { contextBridge, ipcRenderer } from "electron";
-import { CalcRequest } from "./ipc-schema";
+import { contextBridge, ipcRenderer } from 'electron'
 
-interface PreloadAPI {
-  calc: (req: CalcRequest) => Promise<unknown>;
-}
-
-contextBridge.exposeInMainWorld("api", {
-  calc: async (req: CalcRequest) => {
-    const parsed = CalcRequest.safeParse(req);
-    if (!parsed.success) throw new Error(parsed.error.message);
-    return ipcRenderer.invoke("calc:run", parsed.data);
+contextBridge.exposeInMainWorld('api', {
+  calc: async (request: any) => {
+    console.log('Preload: calc called', request)
+    try {
+      const result = await ipcRenderer.invoke('calc:run', request)
+      console.log('Preload: calc result', result)
+      return result
+    } catch (error) {
+      console.error('Preload: calc error', error)
+      throw error
+    }
   }
-} as PreloadAPI);
+})
 
-declare global {
-  interface Window { api: PreloadAPI; }
-}
+console.log('Preload script loaded successfully')
