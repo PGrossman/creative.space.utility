@@ -38,6 +38,7 @@
     },
     "files": [
       "dist-electron/**/*",
+      "datasources/**/*",
       "package.json"
     ],
     "extraResources": [
