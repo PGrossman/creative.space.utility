@@ -1,66 +1,51 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { registerAppMenu } from "./app-menu.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 let win: BrowserWindow | null = null;
 
-// Check if we're in development mode by looking for the dev server
-const isDev = process.env.VITE_DEV_SERVER === "true";
-
 async function createWindow() {
   win = new BrowserWindow({
-    width: 1200,
-    height: 800,
-          webPreferences: {
-        contextIsolation: true,
-        preload: path.join(__dirname, "../preload/preload.js"),
-        nodeIntegration: false,
-        sandbox: false
-      },
-    title: "creative.space.utility"
+    width: 1280,
+    height: 900,
+    title: "creative.space.utility",
+    webPreferences: {
+      contextIsolation: true,
+      nodeIntegration: false,
+      sandbox: false, // Allow ESM preload without sandbox bundling errors
+      preload: path.join(__dirname, "../preload/preload.js")
+    }
   });
 
-  registerAppMenu();
-
-  if (isDev) {
+  if (process.env.VITE_DEV_SERVER) {
     await win.loadURL("http://localhost:5173");
-    win.webContents.openDevTools({ mode: "detach" });
   } else {
     await win.loadFile(path.join(__dirname, "../../dist/index.html"));
   }
 
+  // Quit the entire app when the window closes (macOS included)
   win.on("closed", () => {
     win = null;
-    app.quit();   // force quit when window is closed
+    app.quit();
   });
 }
 
 app.whenReady().then(createWindow);
 
-app.on("window-all-closed", () => {
-  // Quit on all platforms
-  app.quit();
-});
+// Quit when all windows are closed (macOS included)
+app.on("window-all-closed", () => app.quit());
 
-app.on("activate", () => {
-  // On mac, normally you'd re-open — but since you want quit-on-close,
-  // you can leave this empty or just log if needed.
-});
+// No-op on activate; we quit on close
+app.on("activate", () => {});
 
-// IPC (pure calculation calls routed via modules in src/shared/modules/*)
+// IPC dispatcher: dynamic import of compiled shared modules
 ipcMain.handle("calc:run", async (_e, { module, fn, payload }) => {
-  try {
-    const target = path.join(__dirname, "../shared/modules", module, "index.js");
-    const mod = await import(pathToFileURL(target).href);
-    const impl = (mod as any)[fn] ?? (mod as any).default?.[fn];
-    if (typeof impl !== "function") {
-      throw new Error(`Function ${fn} not found in module ${module}`);
-    }
-    return await impl(payload);
-  } catch (err) {
-    console.error("calc:run error", err);
-    throw err;
+  const target = path.join(__dirname, "../shared/modules", module, "index.js");
+  const mod = await import(pathToFileURL(target).href);
+  const impl = (mod as any)[fn] ?? (mod as any).default?.[fn];
+  if (typeof impl !== "function") {
+    throw new Error(`Function ${fn} not found in module ${module}`);
   }
+  return await impl(payload);
 });

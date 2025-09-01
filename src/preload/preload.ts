@@ -1,18 +1,18 @@
-const { contextBridge, ipcRenderer } = require("electron");
-import { CalcRequest } from "./ipc-schema";
+import { contextBridge, ipcRenderer } from "electron";
 
-interface PreloadAPI {
-  calc: (req: CalcRequest) => Promise<unknown>;
-}
-
+/**
+ * Minimal, stable bridge. NO external imports (e.g., no "ipc-schema").
+ * Exposes a single "calc" entrypoint that calls main via ipcRenderer.invoke.
+ */
 contextBridge.exposeInMainWorld("api", {
-  calc: async (req: CalcRequest) => {
-    const parsed = CalcRequest.safeParse(req);
-    if (!parsed.success) throw new Error(parsed.error.message);
-    return ipcRenderer.invoke("calc:run", parsed.data);
-  }
-} as PreloadAPI);
+  calc: (req: { module: string; fn: string; payload: unknown }) =>
+    ipcRenderer.invoke("calc:run", req),
+});
 
 declare global {
-  interface Window { api: PreloadAPI; }
+  interface Window {
+    api: {
+      calc(req: { module: string; fn: string; payload: unknown }): Promise<any>;
+    };
+  }
 }
