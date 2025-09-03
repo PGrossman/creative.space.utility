@@ -25,6 +25,12 @@ function createWindow() {
   } else {
     mainWindow.loadFile(path.join(__dirname, 'renderer/index.html'))
   }
+
+  // Quit app when window closes
+  mainWindow.on('closed', () => {
+    mainWindow = null
+    app.quit()
+  })
 }
 
 app.whenReady().then(createWindow)

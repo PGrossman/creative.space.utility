@@ -48,7 +48,12 @@
       }
     ],
     "mac": {
-      "target": "dmg"
+      "target": "dmg",
+      "icon": "/Volumes/ATOM RAID/Dropbox/_Personal Files/12 - AI Vibe Coding/02 - Cursor Projects/01 - creative.space.utility/datasources/cs-utility.icns"
     }
+  },
+  "dependencies": {
+    "@types/papaparse": "^5.3.16",
+    "papaparse": "^5.5.3"
   }
 }

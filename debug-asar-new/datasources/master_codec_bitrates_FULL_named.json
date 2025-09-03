@@ -1,0 +1,2018 @@
+[
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 35 4.6K OG",
+    "resolution": "4.6K",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 4009.456,
+    "bitrate_MBps": 501.182
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 35 4.6K OG",
+    "resolution": "4.6K",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 4012.8,
+    "bitrate_MBps": 501.6
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 35 4.6K OG",
+    "resolution": "4.6K",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 5010.984,
+    "bitrate_MBps": 626.373
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 35 4.6K OG",
+    "resolution": "4.6K",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 8360.0,
+    "bitrate_MBps": 1045.0
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 35 4.6K OG",
+    "resolution": "4.6K",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 10021.968,
+    "bitrate_MBps": 1252.746
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 35 4K 16:9",
+    "resolution": "4K",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 2436.368,
+    "bitrate_MBps": 304.546
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 35 4K 16:9",
+    "resolution": "4K",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 2438.4,
+    "bitrate_MBps": 304.8
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 35 4K 16:9",
+    "resolution": "4K",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 3044.952,
+    "bitrate_MBps": 380.619
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 35 4K 16:9",
+    "resolution": "4K",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 5080.0,
+    "bitrate_MBps": 635.0
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 35 4K 16:9",
+    "resolution": "4K",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 6089.904,
+    "bitrate_MBps": 761.238
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 65 6.5K",
+    "resolution": "6.5K",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 5851.12,
+    "bitrate_MBps": 731.39
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 65 6.5K",
+    "resolution": "6.5K",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 5856.0,
+    "bitrate_MBps": 732.0
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 65 6.5K",
+    "resolution": "6.5K",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 7312.68,
+    "bitrate_MBps": 914.085
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 65 6.5K",
+    "resolution": "6.5K",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 12200.0,
+    "bitrate_MBps": 1525.0
+  },
+  {
+    "codec_family": "ARRIRAW",
+    "codec": "ALEXA 65 6.5K",
+    "resolution": "6.5K",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 14625.36,
+    "bitrate_MBps": 1828.17
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "12:1",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 57.552,
+    "bitrate_MBps": 7.194
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "12:1",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 57.6,
+    "bitrate_MBps": 7.2
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "12:1",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 71.928,
+    "bitrate_MBps": 8.991
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "12:1",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 120.0,
+    "bitrate_MBps": 15.0
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "12:1",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 143.856,
+    "bitrate_MBps": 17.982
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "12:1",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 209.825,
+    "bitrate_MBps": 26.228
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "12:1",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 210.0,
+    "bitrate_MBps": 26.25
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "12:1",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 262.238,
+    "bitrate_MBps": 32.78
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "12:1",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 437.5,
+    "bitrate_MBps": 54.688
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "12:1",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 524.475,
+    "bitrate_MBps": 65.559
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "3:1",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 211.024,
+    "bitrate_MBps": 26.378
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "3:1",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 211.2,
+    "bitrate_MBps": 26.4
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "3:1",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 263.736,
+    "bitrate_MBps": 32.967
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "3:1",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 440.0,
+    "bitrate_MBps": 55.0
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "3:1",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 527.472,
+    "bitrate_MBps": 65.934
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "3:1",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 815.32,
+    "bitrate_MBps": 101.915
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "3:1",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 816.0,
+    "bitrate_MBps": 102.0
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "3:1",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 1018.98,
+    "bitrate_MBps": 127.373
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "3:1",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 1700.0,
+    "bitrate_MBps": 212.5
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "3:1",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 2037.96,
+    "bitrate_MBps": 254.745
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "5:1",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 127.893,
+    "bitrate_MBps": 15.987
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "5:1",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 128.0,
+    "bitrate_MBps": 16.0
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "5:1",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 159.84,
+    "bitrate_MBps": 19.98
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "5:1",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 266.667,
+    "bitrate_MBps": 33.333
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "5:1",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 319.68,
+    "bitrate_MBps": 39.96
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "5:1",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 491.59,
+    "bitrate_MBps": 61.449
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "5:1",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 492.0,
+    "bitrate_MBps": 61.5
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "5:1",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 614.385,
+    "bitrate_MBps": 76.798
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "5:1",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 1025.0,
+    "bitrate_MBps": 128.125
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "5:1",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 1228.77,
+    "bitrate_MBps": 153.596
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "8:1",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 83.131,
+    "bitrate_MBps": 10.391
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "8:1",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 83.2,
+    "bitrate_MBps": 10.4
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "8:1",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 103.896,
+    "bitrate_MBps": 12.987
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "8:1",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 173.333,
+    "bitrate_MBps": 21.667
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "8:1",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 207.792,
+    "bitrate_MBps": 25.974
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "8:1",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 311.74,
+    "bitrate_MBps": 38.968
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "8:1",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 312.0,
+    "bitrate_MBps": 39.0
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "8:1",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 389.61,
+    "bitrate_MBps": 48.701
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "8:1",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 650.0,
+    "bitrate_MBps": 81.25
+  },
+  {
+    "codec_family": "BRAW",
+    "codec": "8:1",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 779.22,
+    "bitrate_MBps": 97.403
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "100",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 100.0,
+    "bitrate_MBps": 12.5
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "115",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 116.0,
+    "bitrate_MBps": 14.5
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "115",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 116.0,
+    "bitrate_MBps": 14.5
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "145",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 145.0,
+    "bitrate_MBps": 18.125
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "175",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 176.0,
+    "bitrate_MBps": 22.0
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "175",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 176.0,
+    "bitrate_MBps": 22.0
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "175x",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 176.0,
+    "bitrate_MBps": 22.0
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "175x",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 176.0,
+    "bitrate_MBps": 22.0
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "220",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 220.0,
+    "bitrate_MBps": 27.5
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "220x",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 220.0,
+    "bitrate_MBps": 27.5
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "240",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 242.0,
+    "bitrate_MBps": 30.25
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "290",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 291.0,
+    "bitrate_MBps": 36.375
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "350x",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 352.0,
+    "bitrate_MBps": 44.0
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "350x",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 352.0,
+    "bitrate_MBps": 44.0
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "36",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 36.0,
+    "bitrate_MBps": 4.5
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "36",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 36.0,
+    "bitrate_MBps": 4.5
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "365",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 367.0,
+    "bitrate_MBps": 45.875
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "365x",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 367.0,
+    "bitrate_MBps": 45.875
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "440",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 440.0,
+    "bitrate_MBps": 55.0
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "440x",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 440.0,
+    "bitrate_MBps": 55.0
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "440x",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 440.0,
+    "bitrate_MBps": 55.0
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "45",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 45.0,
+    "bitrate_MBps": 5.625
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "75",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 75.0,
+    "bitrate_MBps": 9.375
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "80",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 80.0,
+    "bitrate_MBps": 10.0
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "80",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 80.0,
+    "bitrate_MBps": 10.0
+  },
+  {
+    "codec_family": "DNxHD",
+    "codec": "90",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 90.0,
+    "bitrate_MBps": 11.25
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "4K DCI",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 1421.36,
+    "bitrate_MBps": 177.67
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "4K DCI",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 1421.36,
+    "bitrate_MBps": 177.67
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "4K DCI",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 1776.64,
+    "bitrate_MBps": 222.08
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "4K DCI",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 2964.031,
+    "bitrate_MBps": 370.504
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "4K DCI",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 3553.28,
+    "bitrate_MBps": 444.16
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 333.44,
+    "bitrate_MBps": 41.68
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 333.44,
+    "bitrate_MBps": 41.68
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 416.8,
+    "bitrate_MBps": 52.1
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 695.295,
+    "bitrate_MBps": 86.912
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 833.52,
+    "bitrate_MBps": 104.19
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 1332.88,
+    "bitrate_MBps": 166.61
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 1332.88,
+    "bitrate_MBps": 166.61
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 1666.16,
+    "bitrate_MBps": 208.27
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 2779.713,
+    "bitrate_MBps": 347.464
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "444",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 3332.32,
+    "bitrate_MBps": 416.54
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "4K DCI",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 711.04,
+    "bitrate_MBps": 88.88
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "4K DCI",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 711.04,
+    "bitrate_MBps": 88.88
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "4K DCI",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 888.8,
+    "bitrate_MBps": 111.1
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "4K DCI",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 1482.816,
+    "bitrate_MBps": 185.352
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "4K DCI",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 1777.6,
+    "bitrate_MBps": 222.2
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 166.32,
+    "bitrate_MBps": 20.79
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 166.32,
+    "bitrate_MBps": 20.79
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 207.92,
+    "bitrate_MBps": 25.99
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 346.88,
+    "bitrate_MBps": 43.36
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 415.84,
+    "bitrate_MBps": 51.98
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 666.08,
+    "bitrate_MBps": 83.26
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 666.08,
+    "bitrate_MBps": 83.26
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 832.64,
+    "bitrate_MBps": 104.08
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 1389.056,
+    "bitrate_MBps": 173.632
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQ",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 1665.2,
+    "bitrate_MBps": 208.15
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "4K DCI",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 711.04,
+    "bitrate_MBps": 88.88
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "4K DCI",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 711.04,
+    "bitrate_MBps": 88.88
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "4K DCI",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 888.8,
+    "bitrate_MBps": 111.1
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "4K DCI",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 1482.816,
+    "bitrate_MBps": 185.352
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "4K DCI",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 1777.6,
+    "bitrate_MBps": 222.2
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 166.32,
+    "bitrate_MBps": 20.79
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 166.32,
+    "bitrate_MBps": 20.79
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 207.92,
+    "bitrate_MBps": 25.99
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 346.88,
+    "bitrate_MBps": 43.36
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 415.84,
+    "bitrate_MBps": 51.98
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 666.08,
+    "bitrate_MBps": 83.26
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 666.08,
+    "bitrate_MBps": 83.26
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 832.64,
+    "bitrate_MBps": 104.08
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 1389.056,
+    "bitrate_MBps": 173.632
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "HQX",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 1665.2,
+    "bitrate_MBps": 208.15
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "4K DCI",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 146.08,
+    "bitrate_MBps": 18.26
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "4K DCI",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 146.08,
+    "bitrate_MBps": 18.26
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "4K DCI",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 182.64,
+    "bitrate_MBps": 22.83
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "4K DCI",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 304.705,
+    "bitrate_MBps": 38.088
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "4K DCI",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 365.28,
+    "bitrate_MBps": 45.66
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 34.48,
+    "bitrate_MBps": 4.31
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 34.48,
+    "bitrate_MBps": 4.31
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 43.12,
+    "bitrate_MBps": 5.39
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 71.872,
+    "bitrate_MBps": 8.984
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 86.16,
+    "bitrate_MBps": 10.77
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 137.12,
+    "bitrate_MBps": 17.14
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 137.12,
+    "bitrate_MBps": 17.14
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 171.36,
+    "bitrate_MBps": 21.42
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 285.953,
+    "bitrate_MBps": 35.744
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "LB",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 342.8,
+    "bitrate_MBps": 42.85
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "4K DCI",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 469.76,
+    "bitrate_MBps": 58.72
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "4K DCI",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 469.76,
+    "bitrate_MBps": 58.72
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "4K DCI",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 587.2,
+    "bitrate_MBps": 73.4
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "4K DCI",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 979.713,
+    "bitrate_MBps": 122.464
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "4K DCI",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 1174.48,
+    "bitrate_MBps": 146.81
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 110.16,
+    "bitrate_MBps": 13.77
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 110.16,
+    "bitrate_MBps": 13.77
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 137.68,
+    "bitrate_MBps": 17.21
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 229.696,
+    "bitrate_MBps": 28.712
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 275.36,
+    "bitrate_MBps": 34.42
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 440.56,
+    "bitrate_MBps": 55.07
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 440.56,
+    "bitrate_MBps": 55.07
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 550.72,
+    "bitrate_MBps": 68.84
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 918.719,
+    "bitrate_MBps": 114.84
+  },
+  {
+    "codec_family": "DNxHR",
+    "codec": "SQ",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 1101.36,
+    "bitrate_MBps": 137.67
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 117.62,
+    "bitrate_MBps": 14.702
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 117.718,
+    "bitrate_MBps": 14.715
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 147.0,
+    "bitrate_MBps": 18.375
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 245.245,
+    "bitrate_MBps": 30.656
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 294.0,
+    "bitrate_MBps": 36.75
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 470.478,
+    "bitrate_MBps": 58.81
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 470.871,
+    "bitrate_MBps": 58.859
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 588.0,
+    "bitrate_MBps": 73.5
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 980.981,
+    "bitrate_MBps": 122.623
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 1176.0,
+    "bitrate_MBps": 147.0
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422 HQ",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 176.029,
+    "bitrate_MBps": 22.004
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422 HQ",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 176.176,
+    "bitrate_MBps": 22.022
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422 HQ",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 220.0,
+    "bitrate_MBps": 27.5
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422 HQ",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 367.034,
+    "bitrate_MBps": 45.879
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422 HQ",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 440.0,
+    "bitrate_MBps": 55.0
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422 HQ",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 704.117,
+    "bitrate_MBps": 88.015
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422 HQ",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 704.705,
+    "bitrate_MBps": 88.088
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422 HQ",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 880.0,
+    "bitrate_MBps": 110.0
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422 HQ",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 1468.135,
+    "bitrate_MBps": 183.517
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "422 HQ",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 1760.0,
+    "bitrate_MBps": 220.0
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 264.044,
+    "bitrate_MBps": 33.006
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 264.264,
+    "bitrate_MBps": 33.033
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 330.0,
+    "bitrate_MBps": 41.25
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 550.551,
+    "bitrate_MBps": 68.819
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 660.0,
+    "bitrate_MBps": 82.5
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 1056.176,
+    "bitrate_MBps": 132.022
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 1057.057,
+    "bitrate_MBps": 132.132
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 1320.0,
+    "bitrate_MBps": 165.0
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 2202.202,
+    "bitrate_MBps": 275.275
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 2640.0,
+    "bitrate_MBps": 330.0
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444 XQ",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 400.067,
+    "bitrate_MBps": 50.008
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444 XQ",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 400.4,
+    "bitrate_MBps": 50.05
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444 XQ",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 500.0,
+    "bitrate_MBps": 62.5
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444 XQ",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 834.168,
+    "bitrate_MBps": 104.271
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444 XQ",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 1000.0,
+    "bitrate_MBps": 125.0
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444 XQ",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 1600.267,
+    "bitrate_MBps": 200.033
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444 XQ",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 1601.602,
+    "bitrate_MBps": 200.2
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444 XQ",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 2000.0,
+    "bitrate_MBps": 250.0
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444 XQ",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 3336.67,
+    "bitrate_MBps": 417.084
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "4444 XQ",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 4000.0,
+    "bitrate_MBps": 500.0
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "LT",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 81.614,
+    "bitrate_MBps": 10.202
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "LT",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 81.682,
+    "bitrate_MBps": 10.21
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "LT",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 102.0,
+    "bitrate_MBps": 12.75
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "LT",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 170.17,
+    "bitrate_MBps": 21.271
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "LT",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 204.0,
+    "bitrate_MBps": 25.5
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "LT",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 326.454,
+    "bitrate_MBps": 40.807
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "LT",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 326.727,
+    "bitrate_MBps": 40.841
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "LT",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 408.0,
+    "bitrate_MBps": 51.0
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "LT",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 680.681,
+    "bitrate_MBps": 85.085
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "LT",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 816.0,
+    "bitrate_MBps": 102.0
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "Proxy",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 36.006,
+    "bitrate_MBps": 4.501
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "Proxy",
+    "resolution": "HD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 36.036,
+    "bitrate_MBps": 4.505
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "Proxy",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 45.0,
+    "bitrate_MBps": 5.625
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "Proxy",
+    "resolution": "HD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 75.075,
+    "bitrate_MBps": 9.384
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "Proxy",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 90.0,
+    "bitrate_MBps": 11.25
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "Proxy",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 144.024,
+    "bitrate_MBps": 18.003
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "Proxy",
+    "resolution": "UHD",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 144.144,
+    "bitrate_MBps": 18.018
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "Proxy",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 180.0,
+    "bitrate_MBps": 22.5
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "Proxy",
+    "resolution": "UHD",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 300.3,
+    "bitrate_MBps": 37.538
+  },
+  {
+    "codec_family": "ProRes",
+    "codec": "Proxy",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 360.0,
+    "bitrate_MBps": 45.0
+  },
+  {
+    "codec_family": "RED",
+    "codec": "HQ",
+    "resolution": "6K",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 2238.133,
+    "bitrate_MBps": 279.767
+  },
+  {
+    "codec_family": "RED",
+    "codec": "HQ",
+    "resolution": "6K",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 2240.0,
+    "bitrate_MBps": 280.0
+  },
+  {
+    "codec_family": "RED",
+    "codec": "HQ",
+    "resolution": "6K",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 2797.2,
+    "bitrate_MBps": 349.65
+  },
+  {
+    "codec_family": "RED",
+    "codec": "HQ",
+    "resolution": "6K",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 4666.667,
+    "bitrate_MBps": 583.333
+  },
+  {
+    "codec_family": "RED",
+    "codec": "HQ",
+    "resolution": "6K",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 5594.4,
+    "bitrate_MBps": 699.3
+  },
+  {
+    "codec_family": "RED",
+    "codec": "HQ",
+    "resolution": "8K",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 2877.6,
+    "bitrate_MBps": 359.7
+  },
+  {
+    "codec_family": "RED",
+    "codec": "HQ",
+    "resolution": "8K",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 2880.0,
+    "bitrate_MBps": 360.0
+  },
+  {
+    "codec_family": "RED",
+    "codec": "HQ",
+    "resolution": "8K",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 3596.4,
+    "bitrate_MBps": 449.55
+  },
+  {
+    "codec_family": "RED",
+    "codec": "HQ",
+    "resolution": "8K",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 6000.0,
+    "bitrate_MBps": 750.0
+  },
+  {
+    "codec_family": "RED",
+    "codec": "HQ",
+    "resolution": "8K",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 6400.0,
+    "bitrate_MBps": 800.0
+  },
+  {
+    "codec_family": "RED",
+    "codec": "LQ",
+    "resolution": "6K",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 1119.067,
+    "bitrate_MBps": 139.883
+  },
+  {
+    "codec_family": "RED",
+    "codec": "LQ",
+    "resolution": "6K",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 1120.0,
+    "bitrate_MBps": 140.0
+  },
+  {
+    "codec_family": "RED",
+    "codec": "LQ",
+    "resolution": "6K",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 1398.6,
+    "bitrate_MBps": 174.825
+  },
+  {
+    "codec_family": "RED",
+    "codec": "LQ",
+    "resolution": "6K",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 2333.333,
+    "bitrate_MBps": 291.667
+  },
+  {
+    "codec_family": "RED",
+    "codec": "LQ",
+    "resolution": "6K",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 2797.2,
+    "bitrate_MBps": 349.65
+  },
+  {
+    "codec_family": "RED",
+    "codec": "LQ",
+    "resolution": "8K",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 1438.8,
+    "bitrate_MBps": 179.85
+  },
+  {
+    "codec_family": "RED",
+    "codec": "LQ",
+    "resolution": "8K",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 1440.0,
+    "bitrate_MBps": 180.0
+  },
+  {
+    "codec_family": "RED",
+    "codec": "LQ",
+    "resolution": "8K",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 1798.2,
+    "bitrate_MBps": 224.775
+  },
+  {
+    "codec_family": "RED",
+    "codec": "LQ",
+    "resolution": "8K",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 3000.0,
+    "bitrate_MBps": 375.0
+  },
+  {
+    "codec_family": "RED",
+    "codec": "LQ",
+    "resolution": "8K",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 3596.4,
+    "bitrate_MBps": 449.55
+  },
+  {
+    "codec_family": "RED",
+    "codec": "MQ",
+    "resolution": "6K",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 1678.6,
+    "bitrate_MBps": 209.825
+  },
+  {
+    "codec_family": "RED",
+    "codec": "MQ",
+    "resolution": "6K",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 1680.0,
+    "bitrate_MBps": 210.0
+  },
+  {
+    "codec_family": "RED",
+    "codec": "MQ",
+    "resolution": "6K",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 2097.9,
+    "bitrate_MBps": 262.238
+  },
+  {
+    "codec_family": "RED",
+    "codec": "MQ",
+    "resolution": "6K",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 3500.0,
+    "bitrate_MBps": 437.5
+  },
+  {
+    "codec_family": "RED",
+    "codec": "MQ",
+    "resolution": "6K",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 4195.8,
+    "bitrate_MBps": 524.475
+  },
+  {
+    "codec_family": "RED",
+    "codec": "MQ",
+    "resolution": "8K",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 2158.2,
+    "bitrate_MBps": 269.775
+  },
+  {
+    "codec_family": "RED",
+    "codec": "MQ",
+    "resolution": "8K",
+    "frame_rate": 24.0,
+    "bitrate_Mbps": 2160.0,
+    "bitrate_MBps": 270.0
+  },
+  {
+    "codec_family": "RED",
+    "codec": "MQ",
+    "resolution": "8K",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 2697.3,
+    "bitrate_MBps": 337.163
+  },
+  {
+    "codec_family": "RED",
+    "codec": "MQ",
+    "resolution": "8K",
+    "frame_rate": 50.0,
+    "bitrate_Mbps": 4500.0,
+    "bitrate_MBps": 562.5
+  },
+  {
+    "codec_family": "RED",
+    "codec": "MQ",
+    "resolution": "8K",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 5394.6,
+    "bitrate_MBps": 674.325
+  },
+  {
+    "codec_family": "XAVC-I",
+    "codec": "Class",
+    "resolution": "HD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 89.0,
+    "bitrate_MBps": 11.125
+  },
+  {
+    "codec_family": "XAVC-I",
+    "codec": "Class",
+    "resolution": "HD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 111.0,
+    "bitrate_MBps": 13.875
+  },
+  {
+    "codec_family": "XAVC-I",
+    "codec": "Class",
+    "resolution": "HD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 222.0,
+    "bitrate_MBps": 27.75
+  },
+  {
+    "codec_family": "XAVC-I",
+    "codec": "Class",
+    "resolution": "UHD",
+    "frame_rate": 23.98,
+    "bitrate_Mbps": 240.0,
+    "bitrate_MBps": 30.0
+  },
+  {
+    "codec_family": "XAVC-I",
+    "codec": "Class",
+    "resolution": "UHD",
+    "frame_rate": 29.97,
+    "bitrate_Mbps": 300.0,
+    "bitrate_MBps": 37.5
+  },
+  {
+    "codec_family": "XAVC-I",
+    "codec": "Class",
+    "resolution": "UHD",
+    "frame_rate": 59.94,
+    "bitrate_Mbps": 600.0,
+    "bitrate_MBps": 75.0
+  }
+]

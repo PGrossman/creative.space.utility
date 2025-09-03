@@ -3,12 +3,15 @@ import StorageSize from "../routes/StorageSize";
 import StoragePerformance from "../routes/StoragePerformance";
 import StreamCalculator from "../routes/StreamCalculator";
 import Pricing from "../routes/Pricing";
+import Sales from "../routes/Sales";
+import logoImage from "../assets/CS Logo black.png";
 
 const tabs = [
-  { id: "storage-size", label: "Storage Size" },
-  { id: "storage-performance", label: "Storage Performance" },
-  { id: "stream-calculator", label: "Stream Calculator" },
-  { id: "pricing", label: "Pricing" }
+  { id: "storage-size", label: "Storage" },
+  { id: "storage-performance", label: "Performance" },
+  { id: "stream-calculator", label: "Streams" },
+  { id: "pricing", label: "Pricing" },
+  { id: "sales", label: "Sales" }
 ];
 
 export default function Shell({ children }: PropsWithChildren) {
@@ -17,7 +20,13 @@ export default function Shell({ children }: PropsWithChildren) {
   return (
     <div className="min-h-screen">
       <header className="p-4 border-b bg-white dark:bg-zinc-900">
-        <h1 className="text-xl font-semibold mb-2">Storage Calculator</h1>
+        <div className="flex justify-center mb-2">
+          <img 
+            src={logoImage} 
+            alt="Creative Space" 
+            className="h-12"
+          />
+        </div>
         <nav className="flex gap-4">
           {tabs.map(t => (
             <button
@@ -39,6 +48,7 @@ export default function Shell({ children }: PropsWithChildren) {
         {active === "storage-performance" && <StoragePerformance />}
         {active === "stream-calculator" && <StreamCalculator />}
         {active === "pricing" && <Pricing />}
+        {active === "sales" && <Sales />}
       </main>
     </div>
   );

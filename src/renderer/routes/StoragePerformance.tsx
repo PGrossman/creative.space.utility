@@ -28,11 +28,33 @@ export default function StoragePerformance() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
-  // Selection state
-  const [selectedFamily, setSelectedFamily] = useState<string>('');
-  const [selectedResolution, setSelectedResolution] = useState<string>('');
-  const [selectedFrameRate, setSelectedFrameRate] = useState<number | null>(null);
-  const [selectedCodec, setSelectedCodec] = useState<string>('');
+  // Selection state with defaults
+  const [selectedFamily, setSelectedFamily] = useState<string>('ProRes');
+  const [selectedResolution, setSelectedResolution] = useState<string>('HD');
+  const [selectedFrameRate, setSelectedFrameRate] = useState<number | null>(29.97);
+  const [selectedCodec, setSelectedCodec] = useState<string>('422');
+  
+  // Debug: Log state changes
+  useEffect(() => {
+    console.log('State changed:', { selectedFamily, selectedResolution, selectedFrameRate, selectedCodec });
+  }, [selectedFamily, selectedResolution, selectedFrameRate, selectedCodec]);
+  
+  // Debug: Log individual state changes
+  useEffect(() => {
+    console.log('selectedFamily changed to:', selectedFamily);
+  }, [selectedFamily]);
+  
+  useEffect(() => {
+    console.log('selectedResolution changed to:', selectedResolution);
+  }, [selectedResolution]);
+  
+  useEffect(() => {
+    console.log('selectedFrameRate changed to:', selectedFrameRate);
+  }, [selectedFrameRate]);
+  
+  useEffect(() => {
+    console.log('selectedCodec changed to:', selectedCodec);
+  }, [selectedCodec]);
   
   // Client bandwidth calculator state
   const [simultaneousUsers, setSimultaneousUsers] = useState<number>(1);
@@ -48,34 +70,65 @@ export default function StoragePerformance() {
     const loadCodecData = async () => {
       try {
         setLoading(true);
-        const response = await fetch('../../datasources/master_codec_bitrates_FULL_named.json');
+        setError('');
+        
+        const response = await fetch('../../datasources/master_codec_bitrates_v2.3.csv');
         if (!response.ok) {
           throw new Error(`Failed to load codec data: ${response.status}`);
         }
-        const data: CodecData[] = await response.json();
         
+        const csvText = await response.text();
+        
+        // Parse CSV since this is a .csv file, not JSON
+        const Papa = await import('papaparse');
+        const parsed = Papa.parse(csvText, {
+          header: true,
+          dynamicTyping: true,
+          skipEmptyLines: true,
+          transformHeader: (header) => header.trim()
+        });
+
+        if (parsed.errors.length > 0) {
+          console.warn('CSV parsing warnings:', parsed.errors);
+        }
+
         // Filter to only allowed resolutions
-        const filteredData = data.filter(item => 
+        const filteredData = parsed.data.filter((item: any) => 
           ALLOWED_RESOLUTIONS.includes(item.resolution)
         );
-        
+
+        console.log('Loaded codec data from CSV:', filteredData.length, 'records');
         setCodecData(filteredData);
-        setError(null);
-      } catch (err) {
-        console.error('Error loading codec data:', err);
-        setError('Failed to load codec database. Please check the file path.');
+        
+      } catch (error) {
+        console.error('Error loading codec data:', error);
+        setError('Failed to load codec data');
       } finally {
         setLoading(false);
       }
     };
-
+    
     loadCodecData();
   }, []);
 
   // Get unique resolutions - FIRST level (show all available)
   const availableResolutions = useMemo(() => {
     const resolutions = [...new Set(codecData.map(item => item.resolution))];
-    return resolutions.sort();
+    // Custom sort order: HD, UHD, 6K, 8K
+    const order = ['HD', 'UHD', '6K', '8K'];
+    return resolutions.sort((a, b) => {
+      const indexA = order.indexOf(a);
+      const indexB = order.indexOf(b);
+      // If both are in the order array, sort by their position
+      if (indexA !== -1 && indexB !== -1) {
+        return indexA - indexB;
+      }
+      // If only one is in the order array, prioritize it
+      if (indexA !== -1) return -1;
+      if (indexB !== -1) return 1;
+      // If neither is in the order array, sort alphabetically
+      return a.localeCompare(b);
+    });
   }, [codecData]);
 
   // Get filtered frame rates based on selected resolution - SECOND level
@@ -125,28 +178,134 @@ export default function StoragePerformance() {
         item.codec_family === selectedFamily
       )
       .map(item => item.codec);
-    return [...new Set(codecs)].sort();
+    
+    const uniqueCodecs = [...new Set(codecs)];
+    
+    // Custom sort order for H264 codecs by bitrate
+    if (selectedFamily === 'H264 Family') {
+      const h264Order = [
+        'H264 5 Mbps',
+        'H264 10 Mbps', 
+        'H264 15 Mbps',
+        'H264 20 Mbps',
+        'H264 25 Mbps',
+        'H264 35 Mbps',
+        'H264 50 Mbps',
+        'H264 100 Mbps'
+      ];
+      return uniqueCodecs.sort((a, b) => {
+        const aIndex = h264Order.indexOf(a);
+        const bIndex = h264Order.indexOf(b);
+        // If both are in the order array, sort by their position
+        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+        // If only one is in the order array, prioritize it
+        if (aIndex !== -1) return -1;
+        if (bIndex !== -1) return 1;
+        // If neither is in the order array, sort alphabetically
+        return a.localeCompare(b);
+      });
+    }
+    
+    // Default alphabetical sort for all other codec families
+    return uniqueCodecs.sort();
   }, [codecData, selectedResolution, selectedFrameRate, selectedFamily]);
 
   // Calculate storage requirements when all selections are made
   useEffect(() => {
+    // Debug: Log current state and data structure
+    console.log('=== DEBUG: Storage Performance Calculation ===');
+    console.log('Codec data loaded:', codecData.length, 'records');
+    console.log('First codec record:', codecData[0]);
+    console.log('Selected values:', { 
+      selectedResolution, 
+      selectedFrameRate, 
+      selectedFamily, 
+      selectedCodec 
+    });
+
     if (!selectedFamily || !selectedResolution || selectedFrameRate === null || !selectedCodec) {
+      console.log('Missing selections, setting result to null');
       setResult(null);
       return;
     }
 
     // Convert 25.0 fps selection back to 24.0 for data lookup
     const lookupFrameRate = selectedFrameRate === 25.0 ? 24.0 : selectedFrameRate;
+    console.log('Lookup frame rate:', lookupFrameRate);
+
+    // Debug: Show available codecs for this family
+    const availableForFamily = codecData.filter(item => 
+      item.resolution === selectedResolution && 
+      item.frame_rate === lookupFrameRate &&
+      item.codec_family === selectedFamily
+    );
+    console.log('Available codecs for this family:', availableForFamily.map(item => item.codec));
+    availableForFamily.forEach(item => {
+      console.log('Codec name in CSV:', `"${item.codec}"`);
+    });
 
     // Find the exact codec match using converted frame rate for lookup
-    const codecMatch = codecData.find(item =>
-      item.resolution === selectedResolution &&
-      item.frame_rate === lookupFrameRate &&
-      item.codec_family === selectedFamily &&
-      item.codec === selectedCodec
-    );
+    const codecMatch = codecData.find(item => {
+      // ADD THIS DEBUG LINE:
+      console.log('CODEC COMPARISON:', `"${item.codec}"`, 'vs', `"${selectedCodec}"`, 'Equal:', item.codec === selectedCodec);
+      
+      const matches = (
+        item.resolution === selectedResolution &&
+        item.frame_rate === lookupFrameRate &&
+        item.codec_family === selectedFamily &&
+        String(item.codec).trim() === String(selectedCodec).trim()  // <-- FIXED
+      );
+      
+      if (matches) {
+        console.log('FOUND MATCH:', item);
+      }
+      
+      return matches;
+    });
+
+    console.log('Found codec match:', codecMatch);
 
     if (!codecMatch) {
+      console.log('=== DETAILED CODEC MATCHING DEBUG ===');
+      console.log('Looking for match with:');
+      console.log('- resolution:', selectedResolution);
+      console.log('- frame_rate:', lookupFrameRate);
+      console.log('- codec_family:', selectedFamily);  
+      console.log('- codec:', selectedCodec);
+
+      console.log('Sample data record structure:');
+      console.log('First record keys:', Object.keys(codecData[0] || {}));
+      console.log('First record values:', codecData[0]);
+
+      console.log('Matching records for resolution:', 
+        codecData.filter(item => item.resolution === selectedResolution).length
+      );
+
+      console.log('Matching records for resolution + frame rate:', 
+        codecData.filter(item => 
+          item.resolution === selectedResolution && 
+          item.frame_rate === lookupFrameRate
+        ).length
+      );
+
+      console.log('Matching records for resolution + frame rate + family:', 
+        codecData.filter(item => 
+          item.resolution === selectedResolution && 
+          item.frame_rate === lookupFrameRate &&
+          item.codec_family === selectedFamily
+        ).length
+      );
+
+      console.log('Matching records for resolution + frame rate + family + codec:', 
+        codecData.filter(item => 
+          item.resolution === selectedResolution && 
+          item.frame_rate === lookupFrameRate &&
+          item.codec_family === selectedFamily &&
+          item.codec === selectedCodec
+        ).length
+      );
+
+      console.log('No codec match found, setting result to null');
       setResult(null);
       return;
     }
@@ -174,7 +333,7 @@ export default function StoragePerformance() {
       bitrate_MBps: scaledMBps
     };
 
-    setResult({
+    const finalResult = {
       selectedCodec: scaledCodecData,
       hoursPerGB,
       hoursPerTB,
@@ -182,7 +341,10 @@ export default function StoragePerformance() {
       tbPerHour,
       gbPerDay,
       tbPerDay
-    });
+    };
+    
+    console.log('Setting final result:', finalResult);
+    setResult(finalResult);
   }, [codecData, selectedFamily, selectedResolution, selectedFrameRate, selectedCodec]);
 
   // Client bandwidth calculations
@@ -523,7 +685,13 @@ export default function StoragePerformance() {
           
           <div className="relative w-full h-8 bg-gray-200 rounded-full overflow-hidden">
             <div 
-              className="h-full bg-green-500 transition-all duration-300 ease-in-out"
+              className={`h-full transition-all duration-300 ease-in-out ${
+                networkUtilization.percentage >= 95 
+                  ? 'bg-red-500' 
+                  : networkUtilization.percentage >= 75 
+                    ? 'bg-orange-500' 
+                    : 'bg-green-500'
+              }`}
               style={{ width: `${networkUtilization.percentage}%` }}
             ></div>
             <div className="absolute inset-0 flex items-center justify-center text-sm font-medium text-gray-700">
@@ -568,8 +736,8 @@ export default function StoragePerformance() {
               <div>Hours: 867.21</div>
             </div>
             <div className="space-y-1 text-sm mb-3">
-              <div className={`${bandwidthResults.totalGBps > 15.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
-                Read: 15.00 GB/s
+              <div className={`${bandwidthResults.totalGBps > 2.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Read: 2.00 GB/s
               </div>
               <div className={`${bandwidthResults.totalGBps > 0.9 ? 'text-red-600' : 'text-green-600'} font-medium`}>
                 Write: 0.90 GB/s
@@ -589,8 +757,8 @@ export default function StoragePerformance() {
               <div>Hours: 5203.25</div>
             </div>
             <div className="space-y-1 text-sm mb-3">
-              <div className={`${bandwidthResults.totalGBps > 8.50 ? 'text-red-600' : 'text-green-600'} font-medium`}>
-                Read: 8.50 GB/s
+              <div className={`${bandwidthResults.totalGBps > 3.5 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Read: 3.50 GB/s
               </div>
               <div className={`${bandwidthResults.totalGBps > 1.80 ? 'text-red-600' : 'text-green-600'} font-medium`}>
                 Write: 1.80 GB/s
@@ -631,8 +799,8 @@ export default function StoragePerformance() {
               <div>Hours: 26016.26</div>
             </div>
             <div className="space-y-1 text-sm mb-3">
-              <div className={`${bandwidthResults.totalGBps > 24.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
-                Read: 24.0 GB/s
+              <div className={`${bandwidthResults.totalGBps > 15.0 ? 'text-red-600' : 'text-green-600'} font-medium`}>
+                Read: 15.0 GB/s
               </div>
               <div className={`${bandwidthResults.totalGBps > 10.80 ? 'text-red-600' : 'text-green-600'} font-medium`}>
                 Write: 10.80 GB/s
